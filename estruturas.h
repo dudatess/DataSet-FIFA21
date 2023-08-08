@@ -34,6 +34,12 @@ class HashTable
     {
         int index = hashFunction(player_id);
         
+            // Verifica se a posição está vazia
+    if (table[index].empty()) {
+        // Adiciona uma nova lista à posição vazia
+        table[index].emplace_back();
+    }
+
         //Verifica se o jogador ja esta na posicao da tabela hash
         for(auto& playerList : table[index])
         {
@@ -52,6 +58,7 @@ class HashTable
             }
         }
 
+        
         //Se nao encontrou o jogador, cria uma nova posicao para ele
         PlayerData new_player;
         new_player.player_id = player_id;
