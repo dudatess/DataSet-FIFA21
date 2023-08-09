@@ -86,7 +86,6 @@ public:
                     player.count++;
                     player.sum_ratings += rating;
                     player.rating = player.sum_ratings / player.count;
-
                     return;
                 }
             }
@@ -115,7 +114,6 @@ public:
     {
         for (int index = 0; index < TABLE_SIZE; ++index)
         {
-            // cout << "Index " << index << ":" << endl;
             for (const list<Player> &playerList : table[index])
             {
                 for (const Player &player : playerList)
