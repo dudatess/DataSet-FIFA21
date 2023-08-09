@@ -1,5 +1,3 @@
-// MAIN DA PARTE 1 DO TRABALHO (CONSTRUCAO)
-
 #include <iostream>
 #include "parser.hpp"
 #include "player.cpp"
@@ -9,12 +7,15 @@ using namespace std;
 
 int main()
 {
+
+    // 2.1 
+    // TABELA HASH COM AS INFORMACOES COMPLEMENTARES DE CADA JOGADOR
     HashTable hash_table;
 
-    tabelaAvaliacoes(hash_table, "players.csv", "player");
-    tabelaAvaliacoes(hash_table, "minirating.csv", "rating");
-
+    hash_table = tabelaAvaliacoes(hash_table, "players.csv",  "minirating.csv");
+    
     hash_table.printTable();
+
 
     return 0;
 }

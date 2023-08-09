@@ -6,37 +6,40 @@
 
 using namespace std;
 
-void tabelaAvaliacoes(HashTable hash_table, string nome_arq, string inserir)
+HashTable tabelaAvaliacoes(HashTable hash_table, string players, string ratings)
 {
     using namespace aria::csv;
 
     int line_count = 0;
 
-    // Leitura do arquivo CSV
-    ifstream f(nome_arq);
+    // Leitura do arquivo players.csv
+    ifstream f(players);
     CsvParser parser(f);
-
-    if (inserir == "player")
+        
+    for (auto &row : parser)
     {
-        for (auto &row : parser)
+        if (line_count > 0)
         {
-            if (line_count > 0)
-            {
-                hash_table.insert_player(stoi(row[0]), row[1], row[2]);
-            }
-            line_count++;
+            hash_table.insert_player(stoi(row[0]), row[1], row[2]);
         }
+        line_count++;
     }
 
-    else if (inserir == "rating")
+    line_count = 0;
+
+    // Leitura do arquivo ratings.csv
+    ifstream file(ratings);
+    CsvParser new_parser(file);
+
+    for (auto &row : new_parser)
     {
-        for (auto &row : parser)
+        if (line_count > 0)
         {
-            if (line_count > 0)
-            {
-                hash_table.insert_rating(stoi(row[1]), stoi(row[2]));
-            }
-            line_count++;
+            hash_table.insert_rating(stoi(row[1]), stoi(row[2]));
         }
+        line_count++;
     }
+
+    return hash_table;
+
 }

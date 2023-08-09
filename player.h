@@ -129,7 +129,8 @@ public:
     }
 };
 
+
 // ASSINATURA DAS FUNCOES EM PLAYER.CPP
-void tabelaAvaliacoes(HashTable hash_table, string nome_arq, string inserir);
+HashTable tabelaAvaliacoes(HashTable hash_table, string players, string ratings);
 
 #endif /*PLAYER_H*/
