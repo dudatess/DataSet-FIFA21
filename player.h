@@ -69,19 +69,15 @@ public:
     {
         int index = hashFunction(sofifa_id);
 
-        // Verifica se a posição está vazia
         if (table[index].empty())
         {
-            // Adiciona uma nova lista à posição vazia
             table[index].emplace_back();
         }
 
-        // Verifica se o jogador ja esta na posicao da tabela hash
         for (auto &playerList : table[index])
         {
             for (Player &player : playerList)
             {
-                // Atualiza dados do jogador
                 if (player.sofifa_id == sofifa_id)
                 {
                     player.count++;
@@ -93,7 +89,8 @@ public:
         }
     }
 
-    Player *search(int sofifa_id)
+    // DADO UM ID RETORNA UM JOGADOR
+    Player search(int sofifa_id)
     {
         int index = hashFunction(sofifa_id);
 
@@ -103,12 +100,13 @@ public:
             {
                 if (player.sofifa_id == sofifa_id)
                 {
-                    return &player;
+                return player;
                 }
             }
         }
 
-        return nullptr;
+        return Player();
+
     }
 
     void printTable()
