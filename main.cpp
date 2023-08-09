@@ -16,10 +16,11 @@ int main()
     tabelaAvaliacoes(hash_table, trie, "players.csv", "minirating.csv");
 
     // TESTE DO PREFIXO
-    string prefix = "Ka";
+    string prefix = "Fer";
     vector<int> result = trie.search(prefix);
 
     cout << "Jogadores com prefixo '" << prefix << "': " << endl;
+
 
     for (int id : result)
     {

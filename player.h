@@ -109,6 +109,7 @@ public:
 
     }
 
+    // IMPRIME AS INFORMACOES DE CADA JOGADOR DA TABELA
     void printTable()
     {
         for (int index = 0; index < TABLE_SIZE; ++index)
