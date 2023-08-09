@@ -38,6 +38,7 @@ class HashTable
     static const int TABLE_SIZE = 20000;
     vector<list<Player>> table[TABLE_SIZE];
 
+    // DADO UM ID RETORNA UMA POSICAO NA TABELA
     int hashFunction(int sofifa_id)
     {  
         return sofifa_id % TABLE_SIZE;
@@ -45,6 +46,7 @@ class HashTable
 
     public:
 
+    // DADO UM ID E UMA AVALIACAO, RETORNA 
     void insert(int sofifa_id, double rating)
     {
         int index = hashFunction(sofifa_id);
