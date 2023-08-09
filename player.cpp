@@ -1,34 +1,42 @@
-//FUNCOES PARA A PARTE 1 DO TRABALHO (CONSTRUCAO)
+#include <iostream>
+#include <string>
+#include "parser.hpp"
+#include "player.h"
+#include <cctype>
 
-    #include <iostream>
-    #include <string>
-    #include "parser.hpp"
-    #include "player.h"
-    #include <cctype>
+using namespace std;
 
-    using namespace std;
+void tabelaAvaliacoes(HashTable hash_table, string nome_arq, string inserir)
+{
+    using namespace aria::csv;
 
-    void tabelaAvaliacoes(string nome_arq)
+    int line_count = 0;
+
+    // Leitura do arquivo CSV
+    ifstream f(nome_arq);
+    CsvParser parser(f);
+
+    if (inserir == "player")
     {
-        using namespace aria::csv;
-
-        HashTable hash_table;
-        int line_count = 0;
-
-        //Leitura do arquivo CSV
-        ifstream f(nome_arq);
-        CsvParser parser(f);
-
-        //Leitura linha por linha do arquivo
-        for (auto& row : parser)
+        for (auto &row : parser)
         {
-            if(line_count > 0)
-            {//TA COM BUG NA FUNCAO STOI
-            hash_table.insert(stoi(row[1]), stoi(row[2]));
+            if (line_count > 0)
+            {
+                hash_table.insert_player(stoi(row[0]), row[1], row[2]);
             }
-
             line_count++;
         }
-
-        hash_table.printTable();
     }
+
+    else if (inserir == "rating")
+    {
+        for (auto &row : parser)
+        {
+            if (line_count > 0)
+            {
+                hash_table.insert_rating(stoi(row[1]), stoi(row[2]));
+            }
+            line_count++;
+        }
+    }
+}
