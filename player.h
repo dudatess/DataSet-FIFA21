@@ -1,56 +1,72 @@
-//ARQUIVO HEADER PARA DECLARAR AS CLASSES E AS ESTRUTURAS UTILIZADAS NA PARTE 1 DO TRABALHO (CONSTRUCAO)
+#ifndef PLAYER_H
+#define PLAYER_H
+
+//ARQUIVO HEADER PARA DECLARAR AS CLASSES DO JOGADOR 2.1 DO TRABALHO 
 
 #include <iostream>
-#include "parser.hpp"
 #include <string>
 #include <list>
 
-void tabelaAvaliacoes(std::string nome_arq);
+using namespace std;
 
-struct PlayerData
+// CLASSE DO PLAYER COM INFORMACOES COMPLEMENTARES
+class Player
 {
-    int player_id;
-    double avarage_rating;
-    double sum_ratings;
-    int total_ratings;
+    public:
+        int sofifa_id;
+        string name;
+        string player_positions;
+        double rating;
+        double sum_ratings;
+        int count;
+        Player *next;
 
+    void print_player() const
+    {
+        cout << "  sofifa_id: " << sofifa_id << endl;
+        cout << "  player_positions: " << rating << endl;
+        cout << "  rating: " << rating << endl;
+        cout << "  count: " << count << endl;
+    }
 };
+
 
 class HashTable
 {
     private:
 
     static const int TABLE_SIZE = 20000;
-    std::vector<std::list<PlayerData>> table[TABLE_SIZE];
+    vector<list<Player>> table[TABLE_SIZE];
 
-    int hashFunction(int player_id)
+    int hashFunction(int sofifa_id)
     {  
-        return player_id % TABLE_SIZE;
+        return sofifa_id % TABLE_SIZE;
     }
 
     public:
 
-    void insert(int player_id, double rating)
+    void insert(int sofifa_id, double rating)
     {
-        int index = hashFunction(player_id);
+        int index = hashFunction(sofifa_id);
         
-            // Verifica se a posição está vazia
-    if (table[index].empty()) {
-        // Adiciona uma nova lista à posição vazia
-        table[index].emplace_back();
-    }
+        // Verifica se a posição está vazia
+        if (table[index].empty()) 
+        {
+            // Adiciona uma nova lista à posição vazia
+            table[index].emplace_back();
+        }
 
         //Verifica se o jogador ja esta na posicao da tabela hash
         for(auto& playerList : table[index])
         {
-            for(PlayerData& player : playerList)
+            for(Player& player : playerList)
             {
                 //Atualiza dados do jogador
-                if(player.player_id == player_id)
+                if(player.sofifa_id == sofifa_id)
                 {
-                    player.total_ratings++;
+                    player.count++;
                     player.sum_ratings += rating;
-                    player.avarage_rating = player.sum_ratings/player.total_ratings;
+                    player.rating = player.sum_ratings/player.count;
 
                     return;
                 }
@@ -60,25 +76,25 @@ class HashTable
 
         
         //Se nao encontrou o jogador, cria uma nova posicao para ele
-        PlayerData new_player;
-        new_player.player_id = player_id;
+        Player new_player;
+        new_player.sofifa_id = sofifa_id;
         new_player.sum_ratings = rating;
-        new_player.avarage_rating = 0;
-        new_player.total_ratings = 0;
+        new_player.rating = 0;
+        new_player.count = 0;
         table[index].back().push_back(new_player);
    
         return;
     }
 
-    PlayerData* search(int player_id)
+    Player* search(int player_id)
     {
         int index = hashFunction(player_id);
 
             for(auto& playerList : table[index])
         {
-            for(PlayerData& player : playerList)
+            for(Player& player : playerList)
             {
-                if(player.player_id == player_id)
+                if(player.sofifa_id == player_id)
                 {
                     return &player;
                 }
@@ -86,28 +102,27 @@ class HashTable
             }
         }
 
-
-
         return nullptr;
     }
 
-void printTable()
-{
-    for (int index = 0; index < TABLE_SIZE; ++index)
+    void printTable()
     {
-        std::cout << "Index " << index << ":" << std::endl;
-        for (const std::list<PlayerData>& playerList : table[index])
+        for (int index = 0; index < TABLE_SIZE; ++index)
         {
-            for (const PlayerData& player : playerList)
+            cout << "Index " << index << ":" << endl;
+            for (const list<Player>& playerList : table[index])
             {
-                std::cout << "  Player ID: " << player.player_id << std::endl;
-                std::cout << "  Average Rating: " << player.avarage_rating << std::endl;
-                std::cout << "  Total Ratings: " << player.total_ratings << std::endl;
-                std::cout << "  Sum Ratings: " << player.sum_ratings << std::endl;
-                std::cout << "  ----------------------" << std::endl;
+                for (const Player& player : playerList)
+                {
+                    cout << "  ----------------------" << endl;
+                    player.print_player();
+                    cout << "  ----------------------" << endl;
+                }
             }
         }
     }
-}
 
 };
+
+
+#endif /*PLAYER_H*/
