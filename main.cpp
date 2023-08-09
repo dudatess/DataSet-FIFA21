@@ -13,13 +13,14 @@ int main()
     // TRIE COM OS NOMES DOS JOGADORES E SUAS RESPECTIVAS IDs
     HashTable hash_table;
     Trie trie;
-
     tabelaAvaliacoes(hash_table, trie, "players.csv",  "minirating.csv");
 
+    //TESTE DO PREFIXO
     string prefix = "K";
     vector<int> result = trie.search(prefix);
 
     cout << "Jogadores com prefixo '" << prefix << "': " << endl;
+    
     for (int id : result)
     {
         cout << id << endl;
