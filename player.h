@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <unordered_map>
 
 using namespace std;
 
@@ -92,15 +93,15 @@ public:
         }
     }
 
-    Player *search(int player_id)
+    Player *search(int sofifa_id)
     {
-        int index = hashFunction(player_id);
+        int index = hashFunction(sofifa_id);
 
         for (auto &playerList : table[index])
         {
             for (Player &player : playerList)
             {
-                if (player.sofifa_id == player_id)
+                if (player.sofifa_id == sofifa_id)
                 {
                     return &player;
                 }
@@ -124,6 +125,47 @@ public:
                 }
             }
         }
+    }
+};
+
+
+// NODO DA TRIE
+class TrieNode{
+public:
+    unordered_map<char, TrieNode*> children;
+    vector<int> sofifa_id;
+};
+
+// TRIE
+class Trie {
+private:
+    TrieNode* root;
+
+public:
+    Trie() {
+        root = new TrieNode();
+    }
+
+    void insert(const string& name, int sofifa_id) {
+        TrieNode* current = root;
+        for (char c : name) {
+            if (current->children.find(c) == current->children.end()) {
+                current->children[c] = new TrieNode();
+            }
+            current = current->children[c];
+            current->sofifa_id.push_back(sofifa_id);
+        }
+    }
+
+    vector<int> search(const string& prefix) {
+        TrieNode* current = root;
+        for (char c : prefix) {
+            if (current->children.find(c) == current->children.end()) {
+                return {};
+            }
+            current = current->children[c];
+        }
+        return current->sofifa_id;
     }
 };
 

@@ -14,7 +14,8 @@ int main()
 
     hash_table = tabelaAvaliacoes(hash_table, "players.csv",  "minirating.csv");
     
-    hash_table.printTable();
+    Trie trie;
+
 
 
     return 0;
