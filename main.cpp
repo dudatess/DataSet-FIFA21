@@ -17,11 +17,6 @@ int main()
 
     tabelaAvaliacoes(hash_player, hash_user, trie, "players.csv", "minirating.csv"); // Construcao 2.1 e 2.2
 
-
-    hash_user.printTable();
-
-
-
     // // 2.1 APLICACAO (FIQUEI SEM CRIATIVIDADE)
     // string prefix = "Fer";
     // vector<int> result = trie.search(prefix);
@@ -36,6 +31,8 @@ int main()
     //     player_prefix.print_player();
     //     cout << "  ----------------------" << endl;
     // }
+
+    // 2.2 APLICACAO (FAZER)
 
 
 
