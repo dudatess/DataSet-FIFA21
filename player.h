@@ -2,10 +2,15 @@
 #define PLAYER_H
 
 // ARQUIVO HEADER PARA DECLARAR AS CLASSES DO JOGADOR 2.1 DO TRABALHO
+// Player
+// HashTable
+// TrieNode
+// Trie
 
 #include <iostream>
 #include <string>
 #include <list>
+#include <iomanip>
 #include <unordered_map>
 
 using namespace std;
@@ -26,7 +31,7 @@ public:
         cout << "  sofifa_id: " << sofifa_id << endl;
         cout << "  name: " << name << endl;
         cout << "  player_positions: " << player_positions << endl;
-        cout << "  rating: " << rating << endl;
+        cout << "  rating: " << fixed << setprecision(6) << rating << endl;
         cout << "  count: " << count << endl;
     }
 };
@@ -100,13 +105,12 @@ public:
             {
                 if (player.sofifa_id == sofifa_id)
                 {
-                return player;
+                    return player;
                 }
             }
         }
 
         return Player();
-
     }
 
     // IMPRIME AS INFORMACOES DE CADA JOGADOR DA TABELA
@@ -127,28 +131,33 @@ public:
     }
 };
 
-
 // NODO DA TRIE
-class TrieNode{
+class TrieNode
+{
 public:
-    unordered_map<char, TrieNode*> children;
+    unordered_map<char, TrieNode *> children;
     vector<int> sofifa_id;
 };
 
 // TRIE
-class Trie {
+class Trie
+{
 private:
-    TrieNode* root;
+    TrieNode *root;
 
 public:
-    Trie() {
+    Trie()
+    {
         root = new TrieNode();
     }
 
-    void insert(const string& name, int sofifa_id) {
-        TrieNode* current = root;
-        for (char c : name) {
-            if (current->children.find(c) == current->children.end()) {
+    void insert(const string &name, int sofifa_id)
+    {
+        TrieNode *current = root;
+        for (char c : name)
+        {
+            if (current->children.find(c) == current->children.end())
+            {
                 current->children[c] = new TrieNode();
             }
             current = current->children[c];
@@ -156,10 +165,13 @@ public:
         }
     }
 
-    vector<int> search(const string& prefix) {
-        TrieNode* current = root;
-        for (char c : prefix) {
-            if (current->children.find(c) == current->children.end()) {
+    vector<int> search(const string &prefix)
+    {
+        TrieNode *current = root;
+        for (char c : prefix)
+        {
+            if (current->children.find(c) == current->children.end())
+            {
                 return {};
             }
             current = current->children[c];
@@ -167,7 +179,6 @@ public:
         return current->sofifa_id;
     }
 };
-
 
 // ASSINATURA DAS FUNCOES EM PLAYER.CPP
 void tabelaAvaliacoes(HashTable &hash_table, Trie &trie, string players, string ratings);

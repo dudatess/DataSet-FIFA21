@@ -7,7 +7,7 @@
 
 using namespace std;
 
-// PEGA OS ARQUIVOS PLAYERS.CSV E RATINGS.CSV E COLOCA NUMA HASH AS INFO E NUMA TRIE OS JOGADORES
+// PEGA OS ARQUIVOS PLAYERS.CSV E RATINGS.CSV E COLOCA AS INFO EM UMA HASH E OS PLAYES EM UMA TRIE 
 void tabelaAvaliacoes(HashTable &hash_table, Trie &trie, string players, string ratings)
 {
     using namespace aria::csv;

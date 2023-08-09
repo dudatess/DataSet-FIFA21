@@ -8,19 +8,18 @@ using namespace std;
 int main()
 {
 
-    // 2.1
-    // TABELA HASH COM AS INFORMACOES COMPLEMENTARES DE CADA JOGADOR
-    // TRIE COM OS NOMES DOS JOGADORES E SUAS RESPECTIVAS IDs
-    HashTable hash_table;
-    Trie trie;
-    tabelaAvaliacoes(hash_table, trie, "players.csv", "minirating.csv");
+    // 2.1 CONSTRUCAO
 
-    // TESTE DO PREFIXO
+    Trie trie;            // Trie com os nomes dos jogadores
+    HashTable hash_table; // Hash com as informacoes complementares de cada jogador
+
+    tabelaAvaliacoes(hash_table, trie, "players.csv", "minirating.csv"); // Construcao
+
+    // 2.1 APLICACAO (FIQUEI SEM CRIATIVIDADE)
     string prefix = "Fer";
     vector<int> result = trie.search(prefix);
 
     cout << "Jogadores com prefixo '" << prefix << "': " << endl;
-
 
     for (int id : result)
     {
@@ -30,6 +29,8 @@ int main()
         player_prefix.print_player();
         cout << "  ----------------------" << endl;
     }
+
+    // 2.2
 
     return 0;
 }
