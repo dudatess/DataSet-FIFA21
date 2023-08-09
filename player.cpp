@@ -3,11 +3,12 @@
     #include <iostream>
     #include <string>
     #include "parser.hpp"
-    #include "estruturas.h"
+    #include "player.h"
     #include <cctype>
-    #include <algorithm>
 
-    void tabelaAvaliacoes(std::string nome_arq)
+    using namespace std;
+
+    void tabelaAvaliacoes(string nome_arq)
     {
         using namespace aria::csv;
 
@@ -15,7 +16,7 @@
         int line_count = 0;
 
         //Leitura do arquivo CSV
-        std::ifstream f(nome_arq);
+        ifstream f(nome_arq);
         CsvParser parser(f);
 
         //Leitura linha por linha do arquivo
@@ -23,7 +24,7 @@
         {
             if(line_count > 0)
             {//TA COM BUG NA FUNCAO STOI
-            hash_table.insert(std::stoi(row[1]), std::stoi(row[2]));
+            hash_table.insert(stoi(row[1]), stoi(row[2]));
             }
 
             line_count++;

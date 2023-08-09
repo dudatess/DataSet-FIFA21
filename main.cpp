@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include "parser.hpp"
-#include "estruturas.h"
+#include "player.cpp"
 
 
 using namespace std;
