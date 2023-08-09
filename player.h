@@ -171,6 +171,6 @@ public:
 
 
 // ASSINATURA DAS FUNCOES EM PLAYER.CPP
-HashTable tabelaAvaliacoes(HashTable hash_table, string players, string ratings);
+void tabelaAvaliacoes(HashTable &hash_table, Trie &trie, string players, string ratings);
 
 #endif /*PLAYER_H*/

@@ -3,10 +3,11 @@
 #include "parser.hpp"
 #include "player.h"
 #include <cctype>
+#include <tuple>
 
 using namespace std;
 
-HashTable tabelaAvaliacoes(HashTable hash_table, string players, string ratings)
+void tabelaAvaliacoes(HashTable &hash_table, Trie &trie, string players, string ratings)
 {
     using namespace aria::csv;
 
@@ -21,6 +22,8 @@ HashTable tabelaAvaliacoes(HashTable hash_table, string players, string ratings)
         if (line_count > 0)
         {
             hash_table.insert_player(stoi(row[0]), row[1], row[2]);
+            trie.insert(row[1], stoi(row[0]));
+
         }
         line_count++;
     }
@@ -39,7 +42,5 @@ HashTable tabelaAvaliacoes(HashTable hash_table, string players, string ratings)
         }
         line_count++;
     }
-
-    return hash_table;
 
 }
