@@ -10,6 +10,7 @@ int main()
 
     // 2.1
     // TABELA HASH COM AS INFORMACOES COMPLEMENTARES DE CADA JOGADOR
+    // TRIE COM OS NOMES DOS JOGADORES E SUAS RESPECTIVAS IDs
     HashTable hash_table;
     Trie trie;
 

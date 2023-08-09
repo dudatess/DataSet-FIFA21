@@ -21,6 +21,7 @@ void tabelaAvaliacoes(HashTable &hash_table, Trie &trie, string players, string 
     {
         if (line_count > 0)
         {
+            // Coloca na hash e na trie ao mesmo tempo
             hash_table.insert_player(stoi(row[0]), row[1], row[2]);
             trie.insert(row[1], stoi(row[0]));
 
