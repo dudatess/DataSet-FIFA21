@@ -1,8 +1,5 @@
-#include <iostream>
-#include <string>
-#include "parser.hpp"
+
 #include "player.h"
-#include <cctype>
 
 using namespace std;
 
