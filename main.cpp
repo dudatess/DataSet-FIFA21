@@ -1,5 +1,6 @@
 #include "player.cpp"
 #include "player.h"
+#include "user.h"
 
 using namespace std;
 
@@ -15,6 +16,19 @@ int main()
 
     // 2.2 CONSTRUCAO
     // 20 maiores avaliações do usuario
+    User user;
+    user.user_id=11111;
+    user.sofifa_id.push_back(222222);
+    user.rating.push_back(33333);
+    
+    user.print_user();
+
+
+
+
+
+
+
 
     // // 2.1 APLICACAO (FIQUEI SEM CRIATIVIDADE)
     // string prefix = "Fer";
@@ -30,6 +44,8 @@ int main()
     //     player_prefix.print_player();
     //     cout << "  ----------------------" << endl;
     // }
+
+
 
     return 0;
 }

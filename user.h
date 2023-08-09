@@ -17,14 +17,27 @@ class User
 {
 public:
     int user_id;
-    int sofifa_id;
-    double rating;
+    vector<int> sofifa_id;
+    vector<double> rating;
 
-    void print_player() const
+    void print_user() const
     {
         cout << "  user_id: " << user_id << endl;
-        cout << "  sofifa_id: " << sofifa_id << endl;
-        cout << "  rating: " << fixed << setprecision(6) << rating << endl;
+        for (size_t i = 0; i < sofifa_id.size(); ++i)
+            cout << "  sofifa_id: " << sofifa_id[i] << "  rating: " << rating[i] << endl;
+    }
+};
+
+class Hash_User
+{
+private:
+    static const int TABLE_SIZE = 9999999;
+    vector<list<User>> table[TABLE_SIZE];
+
+    // DADO UM ID RETORNA UMA POSICAO NA TABELA
+    int hashFunction(int user_id)
+    {
+        return user_id % TABLE_SIZE;
     }
 };
 
