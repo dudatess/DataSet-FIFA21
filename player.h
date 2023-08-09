@@ -11,8 +11,8 @@
 #include <string>
 #include <list>
 #include <vector>
-#include "parser.hpp" 
-#include <iomanip>   // I/O MANIPULATION (DOUBLE EM 6 CASAS DECIMAIS)
+#include "parser.hpp"
+#include <iomanip> // I/O MANIPULATION (DOUBLE EM 6 CASAS DECIMAIS)
 
 using namespace std;
 
@@ -131,7 +131,6 @@ public:
         }
     }
 };
-
 
 // NODO DA TRIE
 class TrieNode

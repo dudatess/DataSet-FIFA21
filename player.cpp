@@ -3,7 +3,7 @@
 
 using namespace std;
 
-// PEGA OS ARQUIVOS PLAYERS.CSV E RATINGS.CSV E COLOCA AS INFO EM UMA HASH E OS PLAYES EM UMA TRIE 
+// PEGA OS ARQUIVOS PLAYERS.CSV E RATINGS.CSV E COLOCA AS INFO EM UMA HASH E OS PLAYES EM UMA TRIE
 void tabelaAvaliacoes(HashTable &hash_table, Trie &trie, string players, string ratings)
 {
     using namespace aria::csv;
@@ -13,7 +13,7 @@ void tabelaAvaliacoes(HashTable &hash_table, Trie &trie, string players, string 
     // Leitura do arquivo players.csv
     ifstream f(players);
     CsvParser parser(f);
-        
+
     for (auto &row : parser)
     {
         if (line_count > 0)
@@ -21,7 +21,6 @@ void tabelaAvaliacoes(HashTable &hash_table, Trie &trie, string players, string 
             // Coloca na hash e na trie ao mesmo tempo
             hash_table.insert_player(stoi(row[0]), row[1], row[2]);
             trie.insert(row[1], stoi(row[0]));
-
         }
         line_count++;
     }
@@ -40,5 +39,4 @@ void tabelaAvaliacoes(HashTable &hash_table, Trie &trie, string players, string 
         }
         line_count++;
     }
-
 }
