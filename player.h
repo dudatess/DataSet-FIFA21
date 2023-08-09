@@ -2,10 +2,6 @@
 #define PLAYER_H
 
 // ARQUIVO HEADER PARA DECLARAR AS CLASSES DA PARTE 2.1 DO TRABALHO
-// Player
-// HashTable
-// TrieNode
-// Trie
 
 #include <iostream>
 #include <string>
