@@ -28,6 +28,7 @@ class Player
         cout << "  rating: " << rating << endl;
         cout << "  count: " << count << endl;
     }
+    
 };
 
 
@@ -46,7 +47,7 @@ class HashTable
 
     public:
 
-    // DADO UM ID E UMA AVALIACAO, RETORNA 
+    // DADO UM ID E UMA AVALIACAO, INSERE NA TABELA 
     void insert(int sofifa_id, double rating)
     {
         int index = hashFunction(sofifa_id);
@@ -111,7 +112,7 @@ class HashTable
     {
         for (int index = 0; index < TABLE_SIZE; ++index)
         {
-            cout << "Index " << index << ":" << endl;
+            //cout << "Index " << index << ":" << endl;
             for (const list<Player>& playerList : table[index])
             {
                 for (const Player& player : playerList)
