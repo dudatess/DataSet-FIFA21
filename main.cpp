@@ -30,7 +30,8 @@ int main()
         cout << "  ----------------------" << endl;
     }
 
-    // 2.2
+    // 2.2 CONSTRUCAO
+    // 20 maiores avaliações do usuario
 
     return 0;
 }

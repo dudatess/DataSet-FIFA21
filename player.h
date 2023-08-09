@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-// ARQUIVO HEADER PARA DECLARAR AS CLASSES DO JOGADOR 2.1 DO TRABALHO
+// ARQUIVO HEADER PARA DECLARAR AS CLASSES DA PARTE 2.1 DO TRABALHO
 // Player
 // HashTable
 // TrieNode
@@ -10,8 +10,8 @@
 #include <iostream>
 #include <string>
 #include <list>
-#include <iomanip>
-#include <unordered_map>
+#include <vector>
+#include <iomanip>   // I/O MANIPULATION (DOUBLE EM 6 CASAS DECIMAIS)
 
 using namespace std;
 
@@ -131,12 +131,13 @@ public:
     }
 };
 
+
 // NODO DA TRIE
 class TrieNode
 {
 public:
-    unordered_map<char, TrieNode *> children;
-    vector<int> sofifa_id;
+    vector<pair<char, TrieNode *>> children;
+    list<int> sofifa_id;
 };
 
 // TRIE
@@ -156,11 +157,22 @@ public:
         TrieNode *current = root;
         for (char c : name)
         {
-            if (current->children.find(c) == current->children.end())
+            bool found = false;
+            for (auto &child : current->children)
             {
-                current->children[c] = new TrieNode();
+                if (child.first == c)
+                {
+                    current = child.second;
+                    found = true;
+                    break;
+                }
             }
-            current = current->children[c];
+            if (!found)
+            {
+                TrieNode *newChild = new TrieNode();
+                current->children.emplace_back(c, newChild);
+                current = newChild;
+            }
             current->sofifa_id.push_back(sofifa_id);
         }
     }
@@ -170,13 +182,23 @@ public:
         TrieNode *current = root;
         for (char c : prefix)
         {
-            if (current->children.find(c) == current->children.end())
+            bool found = false;
+            for (auto &child : current->children)
+            {
+                if (child.first == c)
+                {
+                    current = child.second;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
             {
                 return {};
             }
-            current = current->children[c];
         }
-        return current->sofifa_id;
+        vector<int> result(current->sofifa_id.begin(), current->sofifa_id.end());
+        return result;
     }
 };
 
