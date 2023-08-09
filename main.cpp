@@ -10,23 +10,15 @@ int main()
     // 2.1 CONSTRUCAO
 
     Trie trie;            // Trie com os nomes dos jogadores
-    HashTable hash_table; // Hash com as informacoes complementares de cada jogador
-
-    tabelaAvaliacoes(hash_table, trie, "players.csv", "minirating.csv"); // Construcao
-
-    // 2.2 CONSTRUCAO
-    // 20 maiores avaliações do usuario
-    User user;
-    user.user_id=11111;
-    user.sofifa_id.push_back(222222);
-    user.rating.push_back(33333);
+    Hash_Player hash_player; // Hash com as informacoes complementares de cada jogador
     
-    user.print_user();
+    // 2.2 CONSTRUCAO
+    Hash_User hash_user;
+
+    tabelaAvaliacoes(hash_player, hash_user, trie, "players.csv", "minirating.csv"); // Construcao 2.1 e 2.2
 
 
-
-
-
+    hash_user.printTable();
 
 
 

@@ -8,6 +8,7 @@
 #include <list>
 #include <vector>
 #include "parser.hpp"
+#include "user.h"
 #include <iomanip> // I/O MANIPULATION (DOUBLE EM 6 CASAS DECIMAIS)
 
 using namespace std;
@@ -34,7 +35,7 @@ public:
 };
 
 // CLASSE DA HASH PARA INSERIR/EXTRAIR INFOS
-class HashTable
+class Hash_Player
 {
 private:
     static const int TABLE_SIZE = 20000;
@@ -199,6 +200,6 @@ public:
 };
 
 // ASSINATURA DAS FUNCOES EM PLAYER.CPP
-void tabelaAvaliacoes(HashTable &hash_table, Trie &trie, string players, string ratings);
+void tabelaAvaliacoes(Hash_Player &hash_table, Hash_User &hash_user, Trie &trie, string players, string ratings);
 
 #endif /*PLAYER_H*/
