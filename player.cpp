@@ -3,7 +3,6 @@
 #include "parser.hpp"
 #include "player.h"
 #include <cctype>
-#include <tuple>
 
 using namespace std;
 
@@ -31,8 +30,6 @@ void tabelaAvaliacoes(HashTable &hash_table, Trie &trie, string players, string 
     }
 
     line_count = 0;
-    
-    cout<<"TERMINOU O PLAYERS"<<endl;
 
     // Leitura do arquivo ratings.csv
     ifstream file(ratings);
