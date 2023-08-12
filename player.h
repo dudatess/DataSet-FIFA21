@@ -202,4 +202,44 @@ public:
 // ASSINATURA DAS FUNCOES EM PLAYER.CPP
 void tabelaAvaliacoes(Hash_Player &hash_table, Hash_User &hash_user, Trie &trie, string players, string ratings);
 
+
+//Hash Table em que a chave são as tags e os dados nos buckets sao os IDS
+class Hash_Tags{
+
+private:
+
+    static const int TABLE_SIZE = 20000;
+    std::vector<std:: list<int>> table[TABLE_SIZE];
+
+    //Funcao de hash em que as tags sao as chaves
+    int hashFunction(const srd::string &tag)
+    {
+        //Variável hash armazena a soma dos caracteres da tag
+        int hash = 0;
+        for(char c : tag)
+        {
+            hahs += c;
+        }
+
+        return hash % TABLE_SIZE;
+    }
+
+public:
+
+    void insert(const std::string &tag, int id)
+    {
+        int index = hashFunction(tag);
+        table[index].back().push_back(id));
+
+    }
+
+    std::list<int> findPlayerTag(const std::string &tag)
+    {
+        int index = hashFunction(tag);
+        return table[index];
+    }
+
+
+}
+
 #endif /*PLAYER_H*/

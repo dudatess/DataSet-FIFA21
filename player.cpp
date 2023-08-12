@@ -41,3 +41,4 @@ void tabelaAvaliacoes(Hash_Player &hash_player, Hash_User &hash_user, Trie &trie
         line_count++;
     }
 }
+
