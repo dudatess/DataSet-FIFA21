@@ -1,6 +1,7 @@
 #include "player.cpp"
 #include "player.h"
 #include "user.h"
+#include "pesquisa.cpp"
 #include <string>
 #include <iostream>
 
@@ -13,7 +14,6 @@ int main()
     /*CONSTRUÇÃO DAS ESTRUTURAS*/
 
     // 2.1 CONSTRUCAO
-
     Trie trie;            // Trie com os nomes dos jogadores
     Hash_Player hash_player; // Hash com as informacoes complementares de cada jogador
     
@@ -40,6 +40,7 @@ int main()
     // 2.2 APLICACAO (FAZER)
 
     //2.4 
+
     Hash_Tags hash_tags;
     tabelaTags(hash_tags);
 
@@ -76,6 +77,9 @@ int main()
         {
             //Separa as tags
             string tags = input.substr(5);
+            
+            //Chama funcao para fazer a pesquisa das tags
+            pesquisaTags(tags, hash_tags);
         
         }
         else

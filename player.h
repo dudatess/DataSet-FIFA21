@@ -6,19 +6,13 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <algorithm>
 #include <vector>
 #include "parser.hpp"
 #include "user.h"
 #include <iomanip> // I/O MANIPULATION (DOUBLE EM 6 CASAS DECIMAIS)
 
 using namespace std;
-
-//Declaracoes de funcoes player.cpp
-
-void tabelaTags(Hash_Tags &hash_tags);
-void tabelaAvaliacoes(Hash_Player &hash_table, Hash_User &hash_user, Trie &trie, string players, string ratings);
-
-
 
 // CLASSE DO PLAYER COM INFORMACOES COMPLEMENTARES
 class Player
@@ -206,6 +200,7 @@ public:
     }
 };
 
+void tabelaAvaliacoes(Hash_Player &hash_table, Hash_User &hash_user, Trie &trie, string players, string ratings);
 
 //DECLARACAO CLASSE HASH TABLE PARA TAGS (a chave são as tags e os dados nos buckets sao os IDS)
 class Hash_Tags{
@@ -233,17 +228,47 @@ public:
     void insert(const std::string &tag, int id)
     {
         int index = hashFunction(tag);
-        table[index].back().push_back(id);
+
+         if (table[index].empty())
+         {
+            table[index].emplace_back();
+         }
+        
+     // Encontrar a lista apropriada no bucket
+    auto &id_list = table[index].back();
+    
+    // Verificar se o id já está presente na lista
+    if (std::find(id_list.begin(), id_list.end(), id) == id_list.end())
+    {
+        id_list.push_back(id);
+    }
 
     }
 
-    std::vector<std::list<int>> findPlayerTag(const std::string &tag)
+    std::list<int> findPlayerTag(const std::string &tag)
     {
         int index = hashFunction(tag);
-        return table[index];
+        return table[index].empty() ? std::list<int>() : table[index].back();
     }
 
+    void printTable()
+    {
+        for (int index = 0; index < TABLE_SIZE; ++index)
+        {
+            for (const list<int> &ids : table[index])
+            {
+                for (const int id : ids)
+                {
+                    cout << "  ----------------------" << endl;
+                    cout << id << endl;
+                    cout << "  ----------------------" << endl;
+                }
+            }
+        }
+    }
 
 };
+
+void tabelaTags(Hash_Tags &hash_tags);
 
 #endif /*PLAYER_H*/
