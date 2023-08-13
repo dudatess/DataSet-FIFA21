@@ -42,3 +42,26 @@ void tabelaAvaliacoes(Hash_Player &hash_player, Hash_User &hash_user, Trie &trie
     }
 }
 
+//Le o arquivo tags.csv e coloca em uma hash table
+void tabelaTags(Hash_Tags &hash_tags)
+{
+    using namespace aria::csv;
+
+    int line_count = 0;
+
+    // Leitura do arquivo players.csv
+    ifstream f("tags.csv");
+    CsvParser parser(f);
+
+    for (auto &row : parser)
+    {
+        if (line_count > 0)
+        {
+            hash_tags.insert(row[2], stoi(row[1]));
+        }
+
+        line_count++;
+    }
+   
+}
+

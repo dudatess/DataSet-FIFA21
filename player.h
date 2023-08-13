@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-// ARQUIVO HEADER PARA DECLARAR AS CLASSES DA PARTE 2.1 DO TRABALHO
+//ARQUIVO HEADER PARA DECLARAR AS CLASSES
 
 #include <iostream>
 #include <string>
@@ -12,6 +12,13 @@
 #include <iomanip> // I/O MANIPULATION (DOUBLE EM 6 CASAS DECIMAIS)
 
 using namespace std;
+
+//Declaracoes de funcoes player.cpp
+
+void tabelaTags(Hash_Tags &hash_tags);
+void tabelaAvaliacoes(Hash_Player &hash_table, Hash_User &hash_user, Trie &trie, string players, string ratings);
+
+
 
 // CLASSE DO PLAYER COM INFORMACOES COMPLEMENTARES
 class Player
@@ -199,11 +206,8 @@ public:
     }
 };
 
-// ASSINATURA DAS FUNCOES EM PLAYER.CPP
-void tabelaAvaliacoes(Hash_Player &hash_table, Hash_User &hash_user, Trie &trie, string players, string ratings);
 
-
-//Hash Table em que a chave são as tags e os dados nos buckets sao os IDS
+//DECLARACAO CLASSE HASH TABLE PARA TAGS (a chave são as tags e os dados nos buckets sao os IDS)
 class Hash_Tags{
 
 private:
@@ -212,13 +216,13 @@ private:
     std::vector<std:: list<int>> table[TABLE_SIZE];
 
     //Funcao de hash em que as tags sao as chaves
-    int hashFunction(const srd::string &tag)
+    int hashFunction(const std::string &tag)
     {
         //Variável hash armazena a soma dos caracteres da tag
         int hash = 0;
         for(char c : tag)
         {
-            hahs += c;
+            hash += c;
         }
 
         return hash % TABLE_SIZE;
@@ -229,17 +233,17 @@ public:
     void insert(const std::string &tag, int id)
     {
         int index = hashFunction(tag);
-        table[index].back().push_back(id));
+        table[index].back().push_back(id);
 
     }
 
-    std::list<int> findPlayerTag(const std::string &tag)
+    std::vector<std::list<int>> findPlayerTag(const std::string &tag)
     {
         int index = hashFunction(tag);
         return table[index];
     }
 
 
-}
+};
 
 #endif /*PLAYER_H*/
