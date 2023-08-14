@@ -1,10 +1,12 @@
 
 #include "player.h"
+#include "user.h"
+#include "tags.h"
 
 using namespace std;
 
-// PEGA OS ARQUIVOS PLAYERS.CSV E RATINGS.CSV E COLOCA AS INFO EM UMA HASH E OS PLAYES EM UMA TRIE
-void tabelaAvaliacoes(Hash_Player &hash_player, Hash_User &hash_user, Trie &trie, string players, string ratings)
+// LE O ARQUIVO PLAYERS.CSV E COLOCA EM UMA HASH E UMA TRIE DE PLAYER
+void tabelaPlayers(Hash_Player &hash_player, Trie_Player &trie, string players)
 {
     using namespace aria::csv;
 
@@ -24,8 +26,14 @@ void tabelaAvaliacoes(Hash_Player &hash_player, Hash_User &hash_user, Trie &trie
         }
         line_count++;
     }
+}
 
-    line_count = 0;
+// LE O ARQUIVO RATINGS.CSV E COLOCA EM UMA HASH DE USER E COMPLEMENTA A HASH DO PLAYER
+void tabelaRatings(Hash_User &hash_user, Hash_Player &hash_player, string ratings)
+{
+    using namespace aria::csv;
+
+    int line_count = 0;
 
     // Leitura do arquivo ratings.csv
     ifstream file(ratings);
@@ -35,6 +43,7 @@ void tabelaAvaliacoes(Hash_Player &hash_player, Hash_User &hash_user, Trie &trie
     {
         if (line_count > 0)
         {
+            // coloca nas duas hash, de player e user, ao mesmo tempo
             hash_player.insert_rating(stoi(row[1]), stoi(row[2]));
             hash_user.insert_user(stoi(row[0]), stoi(row[1]), stof(row[2]));
         }
@@ -42,7 +51,7 @@ void tabelaAvaliacoes(Hash_Player &hash_player, Hash_User &hash_user, Trie &trie
     }
 }
 
-//Le o arquivo tags.csv e coloca em uma hash table
+// LE O ARQUIVO TAGS.CSV E COLOCA EM UMA HASH
 void tabelaTags(Hash_Tags &hash_tags)
 {
     using namespace aria::csv;
@@ -62,6 +71,4 @@ void tabelaTags(Hash_Tags &hash_tags)
 
         line_count++;
     }
-   
 }
-

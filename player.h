@@ -1,15 +1,13 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-//ARQUIVO HEADER PARA DECLARAR AS CLASSES
+// ARQUIVO HEADER PARA DECLARAR AS CLASSES
 
 #include <iostream>
 #include <string>
 #include <list>
-#include <algorithm>
 #include <vector>
 #include "parser.hpp"
-#include "user.h"
 #include <iomanip> // I/O MANIPULATION (DOUBLE EM 6 CASAS DECIMAIS)
 
 using namespace std;
@@ -139,13 +137,13 @@ public:
 };
 
 // TRIE
-class Trie
+class Trie_Player
 {
 private:
     TrieNode *root;
 
 public:
-    Trie()
+    Trie_Player()
     {
         root = new TrieNode();
     }
@@ -200,75 +198,7 @@ public:
     }
 };
 
-void tabelaAvaliacoes(Hash_Player &hash_table, Hash_User &hash_user, Trie &trie, string players, string ratings);
 
-//DECLARACAO CLASSE HASH TABLE PARA TAGS (a chave são as tags e os dados nos buckets sao os IDS)
-class Hash_Tags{
-
-private:
-
-    static const int TABLE_SIZE = 20000;
-    std::vector<std:: list<int>> table[TABLE_SIZE];
-
-    //Funcao de hash em que as tags sao as chaves
-    int hashFunction(const std::string &tag)
-    {
-        //Variável hash armazena a soma dos caracteres da tag
-        int hash = 0;
-        for(char c : tag)
-        {
-            hash += c;
-        }
-
-        return hash % TABLE_SIZE;
-    }
-
-public:
-
-    void insert(const std::string &tag, int id)
-    {
-        int index = hashFunction(tag);
-
-         if (table[index].empty())
-         {
-            table[index].emplace_back();
-         }
-        
-     // Encontrar a lista apropriada no bucket
-    auto &id_list = table[index].back();
-    
-    // Verificar se o id já está presente na lista
-    if (std::find(id_list.begin(), id_list.end(), id) == id_list.end())
-    {
-        id_list.push_back(id);
-    }
-
-    }
-
-    std::list<int> findPlayerTag(const std::string &tag)
-    {
-        int index = hashFunction(tag);
-        return table[index].empty() ? std::list<int>() : table[index].back();
-    }
-
-    void printTable()
-    {
-        for (int index = 0; index < TABLE_SIZE; ++index)
-        {
-            for (const list<int> &ids : table[index])
-            {
-                for (const int id : ids)
-                {
-                    cout << "  ----------------------" << endl;
-                    cout << id << endl;
-                    cout << "  ----------------------" << endl;
-                }
-            }
-        }
-    }
-
-};
-
-void tabelaTags(Hash_Tags &hash_tags);
+void tabelaPlayers(Hash_Player &hash_player, Trie_Player &trie, string players);
 
 #endif /*PLAYER_H*/

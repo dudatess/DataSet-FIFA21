@@ -7,6 +7,7 @@
 #include <string>
 #include <list>
 #include <vector>
+#include "player.h"
 #include "parser.hpp"
 #include <iomanip> // I/O MANIPULATION (DOUBLE EM 6 CASAS DECIMAIS)
 
@@ -99,7 +100,6 @@ public:
     }
 };
 
-// ASSINATURA DAS FUNCOES EM USER.CPP
-void tabela_hash(Hash_User &hash_user, string ratings);
+void tabelaRatings(Hash_User &hash_user, Hash_Player &hash_player, string ratings);
 
 #endif /*USER_H*/
