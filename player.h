@@ -1,8 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-// ARQUIVO HEADER PARA DECLARAR AS CLASSES
-
 #include <iostream>
 #include <string>
 #include <list>
@@ -197,7 +195,6 @@ public:
         return result;
     }
 };
-
 
 void tabelaPlayers(Hash_Player &hash_player, Trie_Player &trie, string players);
 

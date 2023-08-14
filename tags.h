@@ -6,6 +6,10 @@
 #include <list>
 #include <string>
 
+// Tirei o #include <algorithm> pq nao pode.
+// substitui por um loop simples para verificar a existência do ID na lista
+// fique a vontade para trocar/melhorar
+
 using namespace std;
 
 // DECLARACAO CLASSE HASH TABLE PARA TAGS (a chave são as tags e os dados nos buckets sao os IDS)

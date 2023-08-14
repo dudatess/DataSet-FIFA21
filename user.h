@@ -1,8 +1,6 @@
 #ifndef USER_H
 #define USER_H
 
-// ARQUIVO HEADER PARA DECLARAR AS CLASSES DA PARTE 2.2 DO TRABALHO
-
 #include <iostream>
 #include <string>
 #include <list>
@@ -41,7 +39,6 @@ private:
         return user_id % TABLE_SIZE;
     }
 
-
 public:
     // DADO UM USER ID, SOFIFA_ID E UM RATING INSERE NA TABELA
     void insert_user(int user_id, int sofifa_id, double rating)
@@ -56,8 +53,6 @@ public:
             new_user.rating.push_back(rating);
             table[index].emplace_back();
             table[index].back().push_back(new_user);
-      
-     
         }
 
         for (auto &userList : table[index])
@@ -78,9 +73,7 @@ public:
                 }
             }
         }
-
     }
-
 
     // IMPRIME AS INFORMACOES DE CADA USER DA TABELA
     void printTable()
