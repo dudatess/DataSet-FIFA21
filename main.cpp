@@ -26,31 +26,15 @@ int main()
     tabelaRatings(hash_user, hash_player, "minirating.csv"); // 2.1 e 2.2
     tabelaTags(hash_tags);                                   // 2.4
 
-    cout << "AS CONSTRUCOES TERMINARAM" << endl;
+    cout << "AS CONSTRUCOES TERMINARAM!" << endl;
 
-    // // 2.1 APLICACAO (FIQUEI SEM CRIATIVIDADE)
-    // string prefix = "Fer";
-    // vector<int> result = trie.search(prefix);
-
-    // cout << "Jogadores com prefixo '" << prefix << "': " << endl;
-
-    // for (int id : result)
-    // {
-    //     Player player_prefix = hash_table.search(id);
-
-    //     cout << "  ----------------------" << endl;
-    //     player_prefix.print_player();
-    //     cout << "  ----------------------" << endl;
-    // }
-
-    // 2.2 APLICACAO (FAZER)
 
     /*PROCESSAMENTO DOS COMANDOS*/
 
     while (true)
     {
         string input;
-        cout << "INSIRA A OPCAO:" << endl;
+        cout << "Insira uma opcao:" << endl;
         getline(cin, input);
 
         if (input == "sair")
@@ -59,32 +43,53 @@ int main()
         }
         else if (input.substr(0, 6) == "player")
         {
-            // Sepera comando de pesquida do jogador
+           // Sepera comando de pesquida do jogador
             string player_name = input.substr(7);
         }
         else if (input.substr(0, 4) == "user")
         {
             // Separa o userID do input
-            // int user_id = stoi(input.substr(5));
+            //int user_id = stoi(input.substr(5));
         }
         else if (input.substr(0, 5) == "top10")
         {
-            // Separa a posicao do joagdor
-            string top = input.substr(6);
+        // Separa a posicao do joagdor
+        string top = input.substr(6);
         }
         else if (input.substr(0, 4) == "tags")
         {
-            // Separa as tags
-            string tags = input.substr(5);
+        // Separa as tags
+        string tags = input.substr(5);
 
-            // Chama funcao para fazer a pesquisa das tags
-            pesquisaTags(tags, hash_tags);
+        // Chama funcao para fazer a pesquisa das tags
+         pesquisaTags(tags, hash_tags);
         }
         else
         {
             cout << "Comando invalido." << endl;
         }
     }
+
+
+    /*APLICAÇÃO DAS ESTRUTURAS*/
+    
+
+    //2.1
+    // string prefix = "Fer";
+    // vector<int> result = trie_player.search(prefix);
+
+    // cout << "Jogadores com prefixo '" << prefix << "': " << endl;
+
+    // for (int id : result)
+    // {
+    //     Player player_prefix = hash_player.search(id);
+
+    //     cout << "  ----------------------" << endl;
+    //     player_prefix.print_player();
+    //     cout << "  ----------------------" << endl;
+    // }
+
+    // 2.2 (FAZER)
 
     return 0;
 }
