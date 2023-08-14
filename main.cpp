@@ -32,7 +32,13 @@ int main()
 
     while (true)
     {
-        cout << "Digite um comando: ";
+        cout << endl;
+        cout << "Digite: <comando> <entrada>"<< endl;
+        cout << "- player"<< endl;
+        cout << "- user"<< endl;
+        cout << "- top10"<< endl;
+        cout << "- tags"<< endl;
+
         getline(cin, input);
 
         if (input == "exit")
@@ -41,12 +47,13 @@ int main()
             break;
         }
 
-        if (input.size() >= 2 && input[0] == '$' && input[1] == ' ')
+        if (input.size() >= 2)
         {
             istringstream iss(input);
-            string cifrao, comando, entrada;
+            string comando, entrada;
 
-            iss >> cifrao >> comando >> entrada;
+            iss >> comando;
+            getline(iss, entrada);
 
             if (!iss.fail())
             {
@@ -82,65 +89,6 @@ int main()
             cout << "Formato inválido. Use o formato: $ <comando> <entrada>" << endl;
         }
     }
-
-    // while (true)
-    // {
-    //     string input;
-    //     cout << "Insira uma opcao:" << endl;
-    //     getline(cin, input);
-
-    //     if (input == "sair")
-    //     {
-    //         break; // Encerra o loop se o usuario escolhe sair
-    //     }
-    //     else if (input.substr(0, 6) == "player")
-    //     {
-    //         // Sepera comando de pesquida do jogador
-    //         string player_name = input.substr(7);
-    //     }
-    //     else if (input.substr(0, 4) == "user")
-    //     {
-    //         // Separa o userID do input
-    //         // COMENTEI PQ DAVA ERRO DE COMPILACAO
-    //         // int user_id = stoi(input.substr(5));
-    //     }
-    //     else if (input.substr(0, 5) == "top10")
-    //     {
-    //         // Separa a posicao do joagdor
-    //         string top = input.substr(6);
-    //     }
-    //     else if (input.substr(0, 4) == "tags")
-    //     {
-    //         // Separa as tags
-    //         string tags = input.substr(5);
-
-    //         // Chama funcao para fazer a pesquisa das tags
-    //         pesquisaTags(tags, hash_tags);
-    //     }
-    //     else
-    //     {
-    //         cout << "Comando invalido." << endl;
-    //     }
-    // }
-
-    /*APLICAÇÃO DAS ESTRUTURAS*/
-
-    // 2.1
-    //  string prefix = "Fer";
-    //  vector<int> result = trie_player.search(prefix);
-
-    // cout << "Jogadores com prefixo '" << prefix << "': " << endl;
-
-    // for (int id : result)
-    // {
-    //     Player player_prefix = hash_player.search(id);
-
-    //     cout << "  ----------------------" << endl;
-    //     player_prefix.print_player();
-    //     cout << "  ----------------------" << endl;
-    // }
-
-    // 2.2 (FAZER)
 
     return 0;
 }
