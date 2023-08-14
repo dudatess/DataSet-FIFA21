@@ -1,14 +1,9 @@
 #ifndef TAGS_H
 #define TAGS_H
 
-#include <iostream>
-#include <vector>
-#include <list>
-#include <string>
+// HASH DAS TAGS
 
-// Tirei o #include <algorithm> pq nao pode.
-// substitui por um loop simples para verificar a existência do ID na lista
-// fique a vontade para trocar/melhorar
+#include "player.h"
 
 using namespace std;
 

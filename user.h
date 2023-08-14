@@ -1,13 +1,10 @@
 #ifndef USER_H
 #define USER_H
 
-#include <iostream>
-#include <string>
-#include <list>
-#include <vector>
+// TIPO USER
+// HASH DOS USERS
+
 #include "player.h"
-#include "parser.hpp"
-#include <iomanip> // I/O MANIPULATION (DOUBLE EM 6 CASAS DECIMAIS)
 
 using namespace std;
 

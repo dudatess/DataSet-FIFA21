@@ -2,8 +2,6 @@
 #include "player.h"
 #include "user.h"
 #include "pesquisa.cpp"
-#include <string>
-#include <iostream>
 
 using namespace std;
 

@@ -1,12 +1,16 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+// CLASSE DO PLAYER
+// HASH DOS PLAYERS
+// TRIE DOS PLAYERS
+
 #include <iostream>
 #include <string>
 #include <list>
 #include <vector>
-#include "parser.hpp"
 #include <iomanip> // I/O MANIPULATION (DOUBLE EM 6 CASAS DECIMAIS)
+#include "parser.hpp"
 
 using namespace std;
 
