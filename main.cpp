@@ -48,6 +48,7 @@ int main()
         else if (input.substr(0, 4) == "user")
         {
             // Separa o userID do input
+            // COMENTEI PQ DAVA ERRO DE COMPILACAO
             // int user_id = stoi(input.substr(5));
         }
         else if (input.substr(0, 5) == "top10")

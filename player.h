@@ -10,7 +10,7 @@
 
 using namespace std;
 
-// CLASSE DO PLAYER COM INFORMACOES COMPLEMENTARES
+// CLASSE DO PLAYER
 class Player
 {
 public:
@@ -31,7 +31,7 @@ public:
     }
 };
 
-// CLASSE DA HASH PARA INSERIR/EXTRAIR INFOS
+// HASH DO PLAYER
 class Hash_Player
 {
 private:
@@ -134,7 +134,7 @@ public:
     list<int> sofifa_id;
 };
 
-// TRIE
+// TRIE DO PLAYER
 class Trie_Player
 {
 private:

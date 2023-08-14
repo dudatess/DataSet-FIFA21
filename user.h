@@ -27,6 +27,7 @@ public:
     }
 };
 
+// HASH DO USER
 class Hash_User
 {
 private:
