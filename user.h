@@ -16,11 +16,27 @@ public:
     vector<int> sofifa_id;
     vector<double> rating;
 
+    bool is_duplicate(int id, size_t index) const
+    {
+        for (size_t i = 0; i < index; ++i)
+        {
+            if (sofifa_id[i] == id)
+                return true;
+        }
+        return false;
+    }
+
     void print_user() const
     {
-        cout << "  user_id: " << user_id << endl;
+        cout << "user_id: " << user_id << endl;
+
         for (size_t i = 0; i < sofifa_id.size(); ++i)
-            cout << "  sofifa_id: " << sofifa_id[i] << "  rating: " << rating[i] << endl;
+        {
+            if (!is_duplicate(sofifa_id[i], i))
+            {
+                cout << "  sofifa_id: " << sofifa_id[i] << "  rating: " << rating[i] << endl;
+            }
+        }
     }
 };
 
@@ -71,6 +87,25 @@ public:
                 }
             }
         }
+    }
+
+    // DADO UM ID RETORNA UM USER
+    User search(int user_id)
+    {
+        int index = hashFunction(user_id);
+
+        for (auto &userList : table[index])
+        {
+            for (User &user : userList)
+            {
+                if (user.user_id == user_id)
+                {
+                    return user;
+                }
+            }
+        }
+
+        return User();
     }
 
     // IMPRIME AS INFORMACOES DE CADA USER DA TABELA

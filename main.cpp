@@ -1,7 +1,7 @@
 #include "construcao.cpp"
+#include "aplicacao.cpp"
 #include "player.h"
 #include "user.h"
-#include "pesquisa.cpp"
 
 using namespace std;
 
@@ -26,6 +26,8 @@ int main()
 
     cout << "AS CONSTRUCOES TERMINARAM!" << endl;
 
+    /*LIMBO DE TESTES  90912*/
+
     /*PROCESSAMENTO DOS COMANDOS*/
 
     string input;
@@ -33,7 +35,7 @@ int main()
     while (true)
     {
         cout << endl;
-        cout << "Digite: <comando> <entrada>"<< endl;
+        cout << "Comandos: "<< endl;
         cout << "- player"<< endl;
         cout << "- user"<< endl;
         cout << "- top10"<< endl;
@@ -53,20 +55,23 @@ int main()
             string comando, entrada;
 
             iss >> comando;
+
             getline(iss, entrada);
+            if (!entrada.empty() && entrada[0] == ' ')
+                entrada = entrada.substr(1);
 
             if (!iss.fail())
             {
 
                 if (comando == "player")
                 {
-                    cout << "Player" << endl;
-                    cout << "Entrada: " << entrada << endl;
+                    cout << endl;
+                    pesquisaPlayer(entrada, trie_player,  hash_player);
                 }
                 else if (comando == "user")
                 {
-                    cout << "user" << endl;
-                    cout << "Entrada: " << entrada << endl;
+                    cout<<endl;
+                    pesquisaUser(entrada, hash_user);
                 }
                 else if (comando == "top10")
                 {
@@ -81,12 +86,12 @@ int main()
             }
             else
             {
-                cout << "Formato inválido. Use o formato: $ <comando> <entrada>" << endl;
+                cout << "Formato invalido. Use o formato: <comando> <entrada>" << endl;
             }
         }
         else
         {
-            cout << "Formato inválido. Use o formato: $ <comando> <entrada>" << endl;
+            cout << "Formato invalido. Use o formato: <comando> <entrada>" << endl;
         }
     }
 
