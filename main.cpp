@@ -28,45 +28,100 @@ int main()
 
     /*PROCESSAMENTO DOS COMANDOS*/
 
+    string input;
+
     while (true)
     {
-        string input;
-        cout << "Insira uma opcao:" << endl;
+        cout << "Digite um comando: ";
         getline(cin, input);
 
-        if (input == "sair")
+        if (input == "exit")
         {
-            break; // Encerra o loop se o usuario escolhe sair
+            cout << "Encerrando o programa." << endl;
+            break;
         }
-        else if (input.substr(0, 6) == "player")
-        {
-            // Sepera comando de pesquida do jogador
-            string player_name = input.substr(7);
-        }
-        else if (input.substr(0, 4) == "user")
-        {
-            // Separa o userID do input
-            // COMENTEI PQ DAVA ERRO DE COMPILACAO
-            // int user_id = stoi(input.substr(5));
-        }
-        else if (input.substr(0, 5) == "top10")
-        {
-            // Separa a posicao do joagdor
-            string top = input.substr(6);
-        }
-        else if (input.substr(0, 4) == "tags")
-        {
-            // Separa as tags
-            string tags = input.substr(5);
 
-            // Chama funcao para fazer a pesquisa das tags
-            pesquisaTags(tags, hash_tags);
+        if (input.size() >= 2 && input[0] == '$' && input[1] == ' ')
+        {
+            istringstream iss(input);
+            string cifrao, comando, entrada;
+
+            iss >> cifrao >> comando >> entrada;
+
+            if (!iss.fail())
+            {
+
+                if (comando == "player")
+                {
+                    cout << "Player" << endl;
+                    cout << "Entrada: " << entrada << endl;
+                }
+                else if (comando == "user")
+                {
+                    cout << "user" << endl;
+                    cout << "Entrada: " << entrada << endl;
+                }
+                else if (comando == "top10")
+                {
+                    cout << "top10" << endl;
+                    cout << "Entrada: " << entrada << endl;
+                }
+                else if (comando == "tags")
+                {
+                    cout << "tags" << endl;
+                    cout << "Entrada: " << entrada << endl;
+                }
+            }
+            else
+            {
+                cout << "Formato inválido. Use o formato: $ <comando> <entrada>" << endl;
+            }
         }
         else
         {
-            cout << "Comando invalido." << endl;
+            cout << "Formato inválido. Use o formato: $ <comando> <entrada>" << endl;
         }
     }
+
+    // while (true)
+    // {
+    //     string input;
+    //     cout << "Insira uma opcao:" << endl;
+    //     getline(cin, input);
+
+    //     if (input == "sair")
+    //     {
+    //         break; // Encerra o loop se o usuario escolhe sair
+    //     }
+    //     else if (input.substr(0, 6) == "player")
+    //     {
+    //         // Sepera comando de pesquida do jogador
+    //         string player_name = input.substr(7);
+    //     }
+    //     else if (input.substr(0, 4) == "user")
+    //     {
+    //         // Separa o userID do input
+    //         // COMENTEI PQ DAVA ERRO DE COMPILACAO
+    //         // int user_id = stoi(input.substr(5));
+    //     }
+    //     else if (input.substr(0, 5) == "top10")
+    //     {
+    //         // Separa a posicao do joagdor
+    //         string top = input.substr(6);
+    //     }
+    //     else if (input.substr(0, 4) == "tags")
+    //     {
+    //         // Separa as tags
+    //         string tags = input.substr(5);
+
+    //         // Chama funcao para fazer a pesquisa das tags
+    //         pesquisaTags(tags, hash_tags);
+    //     }
+    //     else
+    //     {
+    //         cout << "Comando invalido." << endl;
+    //     }
+    // }
 
     /*APLICAÇÃO DAS ESTRUTURAS*/
 
