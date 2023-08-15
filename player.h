@@ -10,6 +10,7 @@
 #include <list>
 #include <vector>
 #include <iomanip> // I/O MANIPULATION (DOUBLE EM 6 CASAS DECIMAIS)
+#include <algorithm> //para funcao Find
 #include "parser.hpp"
 
 using namespace std;
@@ -32,6 +33,7 @@ public:
         cout << "  player_positions: " << player_positions << endl;
         cout << "  rating: " << fixed << setprecision(6) << rating << endl;
         cout << "  count: " << count << endl;
+        cout << endl;
     }
 };
 

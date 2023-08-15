@@ -71,4 +71,5 @@ void tabelaTags(Hash_Tags &hash_tags)
 
         line_count++;
     }
+
 }

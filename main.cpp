@@ -80,8 +80,9 @@ int main()
                 }
                 else if (comando == "tags")
                 {
-                    cout << "tags" << endl;
-                    cout << "Entrada: " << entrada << endl;
+                    cout << endl;
+
+                    pesquisaTags(entrada, hash_tags, hash_player);
                 }
             }
             else
