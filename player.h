@@ -80,7 +80,7 @@ public:
             if (player.sofifa_id == sofifa_id)
             {
                 player.count++;
-                player.sum_ratings += rating;
+                player.sum_ratings += rating; // aqui ta arredondando, não sei pq
                 player.rating = player.sum_ratings / player.count;
                 return;
             }

@@ -46,8 +46,8 @@ void tabelaRatings(Hash_User &hash_user, Hash_Player &hash_player, string rating
         if (line_count > 0)
         {
             // coloca nas duas hash, de player e user, ao mesmo tempo
-            hash_player.insert_rating(stoi(row[1]), stoi(row[2]));
-            hash_user.insert_user(stoi(row[0]), stoi(row[1]), stof(row[2]));
+            hash_player.insert_rating(stoi(row[1]), stod(row[2])); // string to double
+            hash_user.insert_user(stoi(row[0]), stoi(row[1]), stod(row[2]));  // string to double
         }
         line_count++;
     }
