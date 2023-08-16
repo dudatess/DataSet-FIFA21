@@ -6,8 +6,8 @@
 
 using namespace std;
 
-// LE O ARQUIVO PLAYERS.CSV E COLOCA EM UMA HASH E UMA TRIE DE PLAYER
-void tabelaPlayers(Hash_Player &hash_player, Trie_Player &trie, string players)
+// LE O ARQUIVO PLAYERS.CSV E COLOCA EM DUAS HASH (DO PLAYER E DAS POSICOES), E EM UMA TRIE DE PLAYER
+void tabelaPlayers(Hash_Player &hash_player, Trie_Player &trie, Hash_Positions &hash_positions, string players)
 {
     using namespace aria::csv;
 
@@ -21,9 +21,10 @@ void tabelaPlayers(Hash_Player &hash_player, Trie_Player &trie, string players)
     {
         if (line_count > 0)
         {
-            // Coloca na hash e na trie ao mesmo tempo
+            // Coloca nas duas hash e na trie ao mesmo tempo
             hash_player.insert_player(stoi(row[0]), row[1], row[2]);
             trie.insert(row[1], stoi(row[0]));
+            hash_positions.insert(row[2], stoi(row[0]));
         }
         line_count++;
     }
@@ -53,29 +54,6 @@ void tabelaRatings(Hash_User &hash_user, Hash_Player &hash_player, string rating
 }
 
 // LE O ARQUIVO PLAYERS.CSV E COLOCA EM UMA HASH
-void tabelaPosicoes(Hash_Positions &hash_positions)
-{
-    using namespace aria::csv;
-
-    int line_count = 0;
-
-    // Leitura do arquivo players.csv
-    ifstream f("players.csv");
-    CsvParser parser(f);
-
-    for (auto &row : parser)
-    {
-        if (line_count > 0)
-        {
-            hash_positions.insert(row[2], stoi(row[0]));
-        }
-
-        line_count++;
-    }
-
-}
-
-
 
 // LE O ARQUIVO TAGS.CSV E COLOCA EM UMA HASH
 void tabelaTags(Hash_Tags &hash_tags)
@@ -97,5 +75,4 @@ void tabelaTags(Hash_Tags &hash_tags)
 
         line_count++;
     }
-
 }

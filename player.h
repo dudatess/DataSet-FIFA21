@@ -12,6 +12,7 @@
 #include <iomanip> // I/O MANIPULATION (DOUBLE EM 6 CASAS DECIMAIS)
 #include <algorithm>
 #include "parser.hpp"
+#include "top.h"
 
 using namespace std;
 
@@ -200,6 +201,6 @@ public:
     }
 };
 
-void tabelaPlayers(Hash_Player &hash_player, Trie_Player &trie, string players);
+void tabelaPlayers(Hash_Player &hash_player, Trie_Player &trie, Hash_Positions &hash_positions, string players);
 
 #endif /*PLAYER_H*/

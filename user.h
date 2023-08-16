@@ -66,7 +66,7 @@ public:
                 {
                     user.sofifa_id.push_back(sofifa_id);
                     user.rating.push_back(rating);
-                    // ORDEM DECRESCENTE
+                    // ORDEM DECRESCENTE demora 30 segundos a mais se a gente ordenar antes
                     for (size_t i = user.rating.size() - 1; i > 0 && user.rating[i] > user.rating[i - 1]; --i)
                     {
                         swap(user.rating[i], user.rating[i - 1]);

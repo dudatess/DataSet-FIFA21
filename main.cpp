@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-
+    // compilar g++ -O2 main.cpp -o main
     /*CONSTRUÇÃO DAS ESTRUTURAS*/
 
     // 2.1
@@ -23,11 +23,13 @@ int main()
     // 2.4
     Hash_Tags hash_tags; // Hash com as tags e as ids
 
-    tabelaPlayers(hash_player, trie_player, "players.csv");  // 2.1 e 2.2
-    tabelaRatings(hash_user, hash_player, "minirating.csv"); // 2.1 e 2.2
-    tabelaPosicoes(hash_positions);
+    cout << "COMECOU" << endl;
+    tabelaPlayers(hash_player, trie_player, hash_positions, "players.csv"); // 2.1 e 2.2
+    cout << "TERMINOU PLAYER.CSV" << endl;
+    tabelaRatings(hash_user, hash_player, "rating.csv"); // 2.1 e 2.2
+    cout << "TERMINOU RATINGS.CSV" << endl;
     tabelaTags(hash_tags); // 2.4
-
+    cout << "TERMINOU TAGS.CSV" << endl;
     cout << "AS CONSTRUCOES TERMINARAM!" << endl;
 
     /*LIMBO DE TESTES  59880*/
@@ -77,7 +79,7 @@ int main()
                     cout << endl;
                     pesquisaUser(entrada, hash_user, hash_player);
                 }
-                else if (comando == "top")
+                else if (comando == "top10")
                 {
                     cout << endl;
                     pesquisaTop(entrada, hash_positions, hash_player);
