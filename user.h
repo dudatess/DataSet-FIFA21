@@ -16,27 +16,17 @@ public:
     vector<int> sofifa_id;
     vector<double> rating;
 
-    bool is_duplicate(int id, size_t index) const
-    {
-        for (size_t i = 0; i < index; ++i)
-        {
-            if (sofifa_id[i] == id)
-                return true;
-        }
-        return false;
-    }
-
     void print_user() const
     {
         cout << "user_id: " << user_id << endl;
-
-        for (size_t i = 0; i < sofifa_id.size(); ++i)
+        int i=0;
+        for(int id: sofifa_id)
         {
-            if (!is_duplicate(sofifa_id[i], i))
-            {
-                cout << "  sofifa_id: " << sofifa_id[i] << "  rating: " << rating[i] << endl;
-            }
+            cout << "sofifa_id: "<< id;
+            cout << " rating: " << rating[i] << endl;
+            i++;
         }
+
     }
 };
 
@@ -45,7 +35,7 @@ class Hash_User
 {
 private:
     static const int TABLE_SIZE = 20000;
-    vector<list<User>> table[TABLE_SIZE];
+    list<User> table[TABLE_SIZE];
 
     // DADO UM ID RETORNA UMA POSICAO NA TABELA
     int hashFunction(int user_id)
@@ -57,7 +47,7 @@ public:
     // DADO UM USER ID, SOFIFA_ID E UM RATING INSERE NA TABELA
     void insert_user(int user_id, int sofifa_id, double rating)
     {
-        int index = hashFunction(sofifa_id);
+        int index = hashFunction(user_id);
 
         if (table[index].empty())
         {
@@ -65,13 +55,12 @@ public:
             new_user.user_id = user_id;
             new_user.sofifa_id.push_back(sofifa_id);
             new_user.rating.push_back(rating);
-            table[index].emplace_back();
-            table[index].back().push_back(new_user);
+            table[index].push_back(new_user);
         }
 
-        for (auto &userList : table[index])
+        else
         {
-            for (User &user : userList)
+            for (User &user : table[index])
             {
                 if (user.user_id == user_id)
                 {
@@ -89,21 +78,19 @@ public:
         }
     }
 
+
+
     // DADO UM ID RETORNA UM USER
     User search(int user_id)
     {
         int index = hashFunction(user_id);
 
-        for (auto &userList : table[index])
-        {
-            for (User &user : userList)
+            for (User &user : table[index])
             {
                 if (user.user_id == user_id)
-                {
                     return user;
-                }
+
             }
-        }
 
         return User();
     }
@@ -113,16 +100,16 @@ public:
     {
         for (int index = 0; index < TABLE_SIZE; ++index)
         {
-            for (const list<User> &userList : table[index])
-            {
-                for (const User &user : userList)
-                {
+            for (User user : table[index])
+            {   
+                if(user.user_id != 0){
                     cout << "  ----------------------" << endl;
                     user.print_user();
                     cout << "  ----------------------" << endl;
                 }
             }
         }
+        
     }
 };
 

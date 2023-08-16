@@ -10,7 +10,7 @@
 #include <list>
 #include <vector>
 #include <iomanip> // I/O MANIPULATION (DOUBLE EM 6 CASAS DECIMAIS)
-#include <algorithm> //para funcao Find
+#include <algorithm>
 #include "parser.hpp"
 
 using namespace std;
@@ -28,12 +28,11 @@ public:
 
     void print_player() const
     {
-        cout << "  sofifa_id: " << sofifa_id << endl;
-        cout << "  name: " << name << endl;
-        cout << "  player_positions: " << player_positions << endl;
-        cout << "  rating: " << fixed << setprecision(6) << rating << endl;
-        cout << "  count: " << count << endl;
-        cout << endl;
+        cout << sofifa_id << " ";
+        cout << name << " ";
+        cout << player_positions << " ";
+        cout << fixed << setprecision(6) << rating << " ";
+        cout << count << " ";
     }
 };
 
@@ -42,9 +41,9 @@ class Hash_Player
 {
 private:
     static const int TABLE_SIZE = 20000;
-    vector<list<Player>> table[TABLE_SIZE];
+    list<Player> table[TABLE_SIZE];
 
-    // DADO UM ID RETORNA UMA POSICAO NA TABELA
+    // Funcao de hash em que as sofifa_id sao as chaves
     int hashFunction(int sofifa_id)
     {
         return sofifa_id % TABLE_SIZE;
@@ -67,7 +66,7 @@ public:
         if (table[index].empty())
             table[index].emplace_back();
 
-        table[index].back().push_back(new_player);
+        table[index].push_back(new_player);
     }
 
     // DADO UM ID E UMA AVALIACAO, INSERE NO JOGADOR
@@ -75,24 +74,25 @@ public:
     {
         int index = hashFunction(sofifa_id);
 
-        if (table[index].empty())
+        for (Player &player : table[index])
         {
-            table[index].emplace_back();
-        }
-
-        for (auto &playerList : table[index])
-        {
-            for (Player &player : playerList)
+            if (player.sofifa_id == sofifa_id)
             {
-                if (player.sofifa_id == sofifa_id)
-                {
-                    player.count++;
-                    player.sum_ratings += rating;
-                    player.rating = player.sum_ratings / player.count;
-                    return;
-                }
+                player.count++;
+                player.sum_ratings += rating;
+                player.rating = player.sum_ratings / player.count;
+                return;
             }
         }
+
+        // Se o jogador não foi encontrado, insere um novo jogador na lista
+        Player newPlayer;
+        newPlayer.sofifa_id = sofifa_id;
+        newPlayer.count = 1;
+        newPlayer.sum_ratings = rating;
+        newPlayer.rating = rating;
+
+        table[index].push_back(newPlayer);
     }
 
     // DADO UM ID RETORNA UM JOGADOR
@@ -100,15 +100,10 @@ public:
     {
         int index = hashFunction(sofifa_id);
 
-        for (auto &playerList : table[index])
+        for (Player &player : table[index])
         {
-            for (Player &player : playerList)
-            {
-                if (player.sofifa_id == sofifa_id)
-                {
-                    return player;
-                }
-            }
+            if (player.sofifa_id == sofifa_id)
+                return player;
         }
 
         return Player();
@@ -117,18 +112,21 @@ public:
     // IMPRIME AS INFORMACOES DE CADA JOGADOR DA TABELA
     void printTable()
     {
-        for (int index = 0; index < TABLE_SIZE; ++index)
+
+        cout << "  sofifa_id: ";
+        cout << "  name: ";
+        cout << "  player_positions: ";
+        cout << "  global rating: " << fixed << setprecision(6);
+        cout << "  count: ";
+        cout << "  ----------------------" << endl;
+        for (int i = 0; i < TABLE_SIZE; ++i)
         {
-            for (const list<Player> &playerList : table[index])
+            for (const Player &player : table[i])
             {
-                for (const Player &player : playerList)
-                {
-                    cout << "  ----------------------" << endl;
-                    player.print_player();
-                    cout << "  ----------------------" << endl;
-                }
+                player.print_player();
             }
         }
+        cout << "  ----------------------" << endl;
     }
 };
 

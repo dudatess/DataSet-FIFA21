@@ -26,11 +26,11 @@ int main()
     tabelaPlayers(hash_player, trie_player, "players.csv");  // 2.1 e 2.2
     tabelaRatings(hash_user, hash_player, "minirating.csv"); // 2.1 e 2.2
     tabelaPosicoes(hash_positions);
-    tabelaTags(hash_tags);                                   // 2.4
+    tabelaTags(hash_tags); // 2.4
 
     cout << "AS CONSTRUCOES TERMINARAM!" << endl;
 
-    /*LIMBO DE TESTES  90912*/
+    /*LIMBO DE TESTES  59880*/
 
     /*PROCESSAMENTO DOS COMANDOS*/
 
@@ -39,11 +39,11 @@ int main()
     while (true)
     {
         cout << endl;
-        cout << "Comandos: "<< endl;
-        cout << "- player"<< endl;
-        cout << "- user"<< endl;
-        cout << "- top10"<< endl;
-        cout << "- tags"<< endl;
+        cout << "Comandos: " << endl;
+        cout << "- player" << endl;
+        cout << "- user" << endl;
+        cout << "- top10" << endl;
+        cout << "- tags" << endl;
 
         getline(cin, input);
 
@@ -70,12 +70,12 @@ int main()
                 if (comando == "player")
                 {
                     cout << endl;
-                    pesquisaPlayer(entrada, trie_player,  hash_player);
+                    pesquisaPlayer(entrada, trie_player, hash_player);
                 }
                 else if (comando == "user")
                 {
-                    cout<<endl;
-                    pesquisaUser(entrada, hash_user);
+                    cout << endl;
+                    pesquisaUser(entrada, hash_user, hash_player);
                 }
                 else if (comando == "top")
                 {

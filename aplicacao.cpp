@@ -13,23 +13,51 @@ void pesquisaPlayer(string prefix, Trie_Player &trie_player, Hash_Player &hash_p
 
     cout << "Jogadores com prefixo '" << prefix << "': " << endl;
 
+    cout << "sofifa_id ";
+    cout << "name ";
+    cout << "player_positions ";
+    cout << "global rating " << fixed << setprecision(6);
+    cout << "count "<<endl;
+
     for (int id : result)
     {
         Player player_prefix = hash_player.search(id);
-
-        cout << "  ----------------------" << endl;
         player_prefix.print_player();
-        cout << "  ----------------------" << endl;
+        cout<<endl;
     }
 
 }
 
 // 2.2
-void pesquisaUser(string entrada, Hash_User &hash_user){
+void pesquisaUser(string entrada, Hash_User &hash_user, Hash_Player &hash_player){
     
-    int id = stoi(entrada);
-    User user = hash_user.search(id);
-    user.print_user();
+    int user_id = stoi(entrada);
+    User user = hash_user.search(user_id );
+
+    int controle =0, i=0;
+
+
+    cout << "sofifa_id ";
+    cout << "name ";
+    cout << "player_positions ";
+    cout << "global rating " << fixed << setprecision(6);
+    cout << "count ";
+    cout << "rating "<<endl;
+    
+    for(int id: user.sofifa_id)
+    {
+        Player player = hash_player.search(id);
+        player.print_player();
+        cout << user.rating[i] << endl;
+        
+        i++;
+        controle ++;
+        if(controle>20)
+            break;
+    }
+        
+
+
 }
 
 // 2.3
@@ -157,6 +185,7 @@ void pesquisaTags(string tags_juntas, Hash_Tags &hash_tags, Hash_Player &hash_pl
  
 }
 
+
 //2.4
 void interseccaoIDS(vector<int> &ids_interseccao, const vector<list<int>> lista_ids)
 {
@@ -191,7 +220,6 @@ void interseccaoIDS(vector<int> &ids_interseccao, const vector<list<int>> lista_
     }
 
 }
-    /*APLICAÇÃO DAS ESTRUTURAS*/
 
 
 
