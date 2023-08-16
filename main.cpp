@@ -7,14 +7,13 @@ using namespace std;
 
 int main()
 {
-    //PARA COMPILAR g++ -O2 main.cpp -o main
-
+    /*PARA COMPILAR: g++ -O2 main.cpp -o main*/
 
     /*CONSTRUÇÃO DAS ESTRUTURAS*/
 
     // 2.1 OK
     Trie_Player trie_player; // Trie com os nomes dos jogadores
-    Hash_Player hash_player; // Hash com as informacoes complementares de cada jogador 
+    Hash_Player hash_player; // Hash com as informacoes complementares de cada jogador
 
     // 2.2 OK
     Hash_User hash_user; // Hash com os usuarios e suas avaliacoes
@@ -46,7 +45,7 @@ int main()
         cout << "Comandos: " << endl;
         cout << "- player" << endl;
         cout << "- user" << endl;
-        cout << "- top10" << endl;
+        cout << "- topN" << endl;
         cout << "- tags" << endl;
 
         getline(cin, input);
@@ -81,7 +80,7 @@ int main()
                     cout << endl;
                     pesquisaUser(entrada, hash_user, hash_player);
                 }
-                else if (comando == "top10")
+                else if (comando == "topN")
                 {
                     cout << endl;
                     pesquisaTop(entrada, hash_positions, hash_player);
