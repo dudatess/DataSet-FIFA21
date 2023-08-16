@@ -96,6 +96,7 @@ class Hash_Tags
 {
 
 private:
+
     static const int TABLE_SIZE = 20000;
     list<int> table[TABLE_SIZE];
 
@@ -113,6 +114,7 @@ private:
     }
 
 public:
+
     void insert(const string &tag, int id)
     {
         int index = hashFunction(tag);

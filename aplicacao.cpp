@@ -1,6 +1,8 @@
 #include "player.h"
 #include "user.h"
 #include "tags.h"
+#include "top.h"
+#include "merge.cpp"
 
 using namespace std;
 
@@ -30,6 +32,51 @@ void pesquisaUser(string entrada, Hash_User &hash_user){
     user.print_user();
 }
 
+// 2.3
+void pesquisaTop(string entrada, Hash_Positions &hash_positions, Hash_Player &hash_player)
+{
+    
+    int numero_top = 0;
+    string posicao;
+    vector<int> ids_jogadores;
+    vector<Player> topJogadores;
+
+    //Separar string de entrada em quantidade de top jogadores
+    //e posicao
+
+    istringstream stream(entrada);
+    stream >> numero_top;
+    stream.ignore();
+    stream >> posicao;
+
+    if (posicao.front() == '\'' && posicao.back() == '\'')
+    {
+        posicao = posicao.substr(1, posicao.length() - 2);
+    }
+
+    //Fazer pesquisa na tabela hash "hash positions" com a posicao desejada
+    ids_jogadores = hash_positions.findPosition(posicao);
+
+
+    //Ordena os IDS de acordo com as suas avaliacoes 
+    mergeSort(ids_jogadores, hash_player, 0, ids_jogadores.size() - 1);
+
+
+    //Pegar os primeiros numero_top jogadores
+    for(int i = 0; i < numero_top && i < ids_jogadores.size(); ++i)
+    {
+        if(hash_player.search(ids_jogadores[i]).count >= 1)
+        {
+            topJogadores.push_back(hash_player.search(ids_jogadores[i]));        
+        }
+    }
+
+    for(const Player& player : topJogadores)
+    {
+        player.print_player();
+    }
+
+}
 
 // 2.4
 void pesquisaTags(string tags_juntas, Hash_Tags &hash_tags, Hash_Player &hash_player)

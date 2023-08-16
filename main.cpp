@@ -17,11 +17,15 @@ int main()
     // 2.2
     Hash_User hash_user; // Hash com os usuarios e suas avaliacoes
 
+    // 2.3
+    Hash_Positions hash_positions;
+
     // 2.4
     Hash_Tags hash_tags; // Hash com as tags e as ids
 
     tabelaPlayers(hash_player, trie_player, "players.csv");  // 2.1 e 2.2
     tabelaRatings(hash_user, hash_player, "minirating.csv"); // 2.1 e 2.2
+    tabelaPosicoes(hash_positions);
     tabelaTags(hash_tags);                                   // 2.4
 
     cout << "AS CONSTRUCOES TERMINARAM!" << endl;
@@ -73,10 +77,10 @@ int main()
                     cout<<endl;
                     pesquisaUser(entrada, hash_user);
                 }
-                else if (comando == "top10")
+                else if (comando == "top")
                 {
-                    cout << "top10" << endl;
-                    cout << "Entrada: " << entrada << endl;
+                    cout << endl;
+                    pesquisaTop(entrada, hash_positions, hash_player);
                 }
                 else if (comando == "tags")
                 {

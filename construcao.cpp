@@ -2,6 +2,7 @@
 #include "player.h"
 #include "user.h"
 #include "tags.h"
+#include "top.h"
 
 using namespace std;
 
@@ -50,6 +51,31 @@ void tabelaRatings(Hash_User &hash_user, Hash_Player &hash_player, string rating
         line_count++;
     }
 }
+
+// LE O ARQUIVO PLAYERS.CSV E COLOCA EM UMA HASH
+void tabelaPosicoes(Hash_Positions &hash_positions)
+{
+    using namespace aria::csv;
+
+    int line_count = 0;
+
+    // Leitura do arquivo players.csv
+    ifstream f("players.csv");
+    CsvParser parser(f);
+
+    for (auto &row : parser)
+    {
+        if (line_count > 0)
+        {
+            hash_positions.insert(row[2], stoi(row[0]));
+        }
+
+        line_count++;
+    }
+
+}
+
+
 
 // LE O ARQUIVO TAGS.CSV E COLOCA EM UMA HASH
 void tabelaTags(Hash_Tags &hash_tags)
