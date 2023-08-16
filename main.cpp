@@ -7,14 +7,16 @@ using namespace std;
 
 int main()
 {
-    // compilar g++ -O2 main.cpp -o main
+    //PARA COMPILAR g++ -O2 main.cpp -o main
+
+
     /*CONSTRUÇÃO DAS ESTRUTURAS*/
 
-    // 2.1
+    // 2.1 OK
     Trie_Player trie_player; // Trie com os nomes dos jogadores
-    Hash_Player hash_player; // Hash com as informacoes complementares de cada jogador
+    Hash_Player hash_player; // Hash com as informacoes complementares de cada jogador 
 
-    // 2.2
+    // 2.2 OK
     Hash_User hash_user; // Hash com os usuarios e suas avaliacoes
 
     // 2.3

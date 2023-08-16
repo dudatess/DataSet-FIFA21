@@ -1,11 +1,13 @@
 #ifndef TOP_H
 #define TOP_H
 
+// HASH DAS POSICOES
+
 #include "player.h"
 
 using namespace std;
 
-//Hash table em que as chaves sao as posicoes do jogador 
+// HASH TABLE EM QUE AS CHAVES SAO AS POSICOES
 class Hash_Positions{
     
 private:
