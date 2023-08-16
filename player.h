@@ -10,7 +10,6 @@
 #include <list>
 #include <vector>
 #include <iomanip> // I/O MANIPULATION (DOUBLE EM 6 CASAS DECIMAIS)
-#include <algorithm>
 #include "parser.hpp"
 #include "top.h"
 

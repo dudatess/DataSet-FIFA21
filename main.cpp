@@ -33,7 +33,11 @@ int main()
     cout << "TERMINOU TAGS.CSV" << endl;
     cout << "AS CONSTRUCOES TERMINARAM!" << endl;
 
-    /*LIMBO DE TESTES  59880*/
+    /*LIMBO DE TESTES*/
+
+    /*126061*/
+    /*2782 */
+    /*14904*/
 
     /*PROCESSAMENTO DOS COMANDOS*/
 
@@ -45,7 +49,7 @@ int main()
         cout << "Comandos: " << endl;
         cout << "- player" << endl;
         cout << "- user" << endl;
-        cout << "- topN" << endl;
+        cout << "- top" << endl;
         cout << "- tags" << endl;
 
         getline(cin, input);
@@ -80,7 +84,7 @@ int main()
                     cout << endl;
                     pesquisaUser(entrada, hash_user, hash_player);
                 }
-                else if (comando == "topN")
+                else if (comando == "top")
                 {
                     cout << endl;
                     pesquisaTop(entrada, hash_positions, hash_player);

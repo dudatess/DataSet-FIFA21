@@ -7,6 +7,7 @@
 
 using namespace std;
 
+
 // HASH TABLE EM QUE AS CHAVES SAO AS POSICOES
 class Hash_Positions{
     
