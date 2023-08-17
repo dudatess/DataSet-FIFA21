@@ -14,18 +14,19 @@ class Hash_Tags
         static const int TABLE_SIZE = 20000;
         list<int> table[TABLE_SIZE];
 
-        // Funcao de hash em que as tags sao as chaves
-        int hashFunction(const string &tag)
-        {
-            // Variável hash armazena a soma dos caracteres da tag
-            int hash = 0;
-            for (char c : tag)
-            {
-                hash += c;
-            }
+    // Funcao de hash em que as tags sao as chaves
+    int hashFunction(const string &tag)
+    {
+        //Funcao hash polinomial, utilizado propriedade aritmetica modular 
+        int hash = 0;
 
-            return hash % TABLE_SIZE;
+        for(int i = 0; i < tag.length(); i++)
+        {
+            hash = (31 * hash + tag[i]) % TABLE_SIZE;
         }
+
+        return hash;
+    }
 
     public:
 

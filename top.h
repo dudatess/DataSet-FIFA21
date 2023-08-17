@@ -19,15 +19,17 @@ private:
     // Funcao de hash em que as posicoes sao as chaves
     int hashFunction(const string &positions)
     {
-        // Variável hash armazena a soma dos caracteres da tag
+        //Funcao hash polinomial, utilizado propriedade aritmetica modular 
         int hash = 0;
-        for (char c : positions)
+
+        for(int i = 0; i < positions.length(); i++)
         {
-            hash += c;
+            hash = (31 * hash + positions[i]) % TABLE_SIZE;
         }
 
-        return hash % TABLE_SIZE;
+        return hash;
     }
+
 
 public:
 

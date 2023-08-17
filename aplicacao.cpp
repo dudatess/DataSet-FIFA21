@@ -111,18 +111,13 @@ void pesquisaTags(string tags_juntas, Hash_Tags &hash_tags, Hash_Player &hash_pl
     istringstream iss(tags_juntas);
     string tag;
 
-    // Percorre a string e divide em palavras baseadas nos espacos
-    while (iss >> tag)
+    //Divide a string baseada em apostofres
+    while (getline(iss, tag, '\''))
     {
-        // Tire as apostrofes da tag
-        if (tag.front() == '\'' && tag.back() == '\'')
+        if (!tag.empty() && tag != " ") 
         {
-            tag = tag.substr(1, tag.length() - 2);
+            tags.push_back(tag);
         }
-        // Guarda as tags em um vector
-        tags.push_back(tag);
-
-        cout << tag << endl;
     }
 
     if (tags.size() == 1)
