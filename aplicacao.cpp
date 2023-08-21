@@ -68,19 +68,18 @@ void pesquisaTop(string entrada, Hash_Positions &hash_positions, Hash_Player &ha
     vector<int> sofifa_ids;
     vector<Player> players_top;
 
-    // Procurando a posição do primeiro caractere numérico
+
+    // FORMATO top<N> ‘<position>’
     size_t numStart = entrada.find_first_of("0123456789");
 
     if (numStart != string::npos) {
         top = entrada.substr(0, numStart);
 
-        // Encontrando o final do número
         size_t numEnd = entrada.find_first_not_of("0123456789", numStart);
         if (numEnd != string::npos) {
             string numStr = entrada.substr(numStart, numEnd - numStart);
             istringstream(numStr) >> numero_top;
 
-            // Encontrando a posição entre as aspas
             size_t posStart = entrada.find_first_of("'\"", numEnd);
             size_t posEnd = entrada.find_first_of("'\"", posStart + 1);
 
@@ -89,7 +88,6 @@ void pesquisaTop(string entrada, Hash_Positions &hash_positions, Hash_Player &ha
         }
     }
 
-    // Fazer pesquisa na tabela hash "hash positions" com a posicao desejada
     sofifa_ids = hash_positions.search(posicao).sofifa_id;
 
     for(int id : sofifa_ids){
@@ -98,14 +96,12 @@ void pesquisaTop(string entrada, Hash_Positions &hash_positions, Hash_Player &ha
         players_top.push_back(new_player);
     }
 
-    // Ordena os IDS de acordo com as suas avaliacoes
     int n = players_top.size();
     quickSort(players_top, 0, n - 1);
     
     int controle;
     controle = 1;
 
-    // Pegar os primeiros numero_top jogadores
     for(Player &player: players_top){
         
         if(controle > numero_top){
@@ -119,8 +115,6 @@ void pesquisaTop(string entrada, Hash_Positions &hash_positions, Hash_Player &ha
             controle++;
         }
         
-
-
     }
     
 }
