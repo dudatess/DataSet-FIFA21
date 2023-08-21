@@ -3,7 +3,7 @@
 
 using namespace std;
 
-// Função auxiliar para o QuickSort
+// PARTICAO DO QUICKSORT
 int partition(vector<Player>& players, int low, int high)
 {
     double pivot = players[high].rating;
@@ -21,7 +21,7 @@ int partition(vector<Player>& players, int low, int high)
     return (i + 1);
 }
 
-// Função principal do QuickSort
+// QUICKSORT
 void quickSort(vector<Player>& players, int low, int high)
 {
     if (low < high)
@@ -33,8 +33,8 @@ void quickSort(vector<Player>& players, int low, int high)
     }
 }
 
-// Função de ordenação pública
-void sortPlayersByRatingDescending(vector<Player>& players)
+// ORDENA DECRESCENTE
+void sortDescending(vector<Player>& players)
 {
     int n = players.size();
     quickSort(players, 0, n - 1);

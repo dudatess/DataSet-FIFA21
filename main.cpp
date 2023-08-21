@@ -18,7 +18,7 @@ int main()
     // 2.2 OK
     Hash_User hash_user; // Hash com os usuarios e suas avaliacoes
 
-    // 2.3
+    // 2.3 OK
     Hash_Positions hash_positions;
 
     // 2.4
@@ -33,11 +33,6 @@ int main()
     cout << "TERMINOU TAGS.CSV" << endl;
     cout << "AS CONSTRUCOES TERMINARAM!" << endl;
 
-    /*LIMBO DE TESTES*/
-
-    /*user 126061*/
-    /*user 2782 */
-    /*user 14904*/
 
     /*PROCESSAMENTO DOS COMANDOS*/
 
@@ -86,6 +81,7 @@ int main()
                 }
                 else if (comando[1] == 'o')
                 {
+
                     pesquisaTop(input, hash_positions, hash_player);
                 }
                 else if (comando == "tags")
