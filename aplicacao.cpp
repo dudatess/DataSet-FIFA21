@@ -2,7 +2,7 @@
 #include "user.h"
 #include "tags.h"
 #include "top.h"
-#include "merge.cpp"
+#include "quicksort.cpp"
 #include <algorithm> // TEM QUE TIRAR ESSE ALGORITHM
 
 using namespace std;
@@ -61,46 +61,68 @@ void pesquisaUser(string entrada, Hash_User &hash_user, Hash_Player &hash_player
 // 2.3
 void pesquisaTop(string entrada, Hash_Positions &hash_positions, Hash_Player &hash_player)
 {
-
-    int numero_top = 0;
+    string top;
+    int numero_top;
     string posicao;
-    vector<int> ids_jogadores;
-    vector<Player> topJogadores;
 
-    // Separar string de entrada em quantidade de top jogadores
-    // e posicao
+    vector<int> sofifa_ids;
+    vector<Player> players_top;
 
-    istringstream stream(entrada);
-    stream >> numero_top;
-    stream.ignore();
-    stream >> posicao;
+    // Procurando a posição do primeiro caractere numérico
+    size_t numStart = entrada.find_first_of("0123456789");
 
-    if (posicao.front() == '\'' && posicao.back() == '\'')
-    {
-        posicao = posicao.substr(1, posicao.length() - 2);
-    }
+    if (numStart != string::npos) {
+        top = entrada.substr(0, numStart);
 
-    // Fazer pesquisa na tabela hash "hash positions" com a posicao desejada
-    ids_jogadores = hash_positions.findPosition(posicao);
+        // Encontrando o final do número
+        size_t numEnd = entrada.find_first_not_of("0123456789", numStart);
+        if (numEnd != string::npos) {
+            string numStr = entrada.substr(numStart, numEnd - numStart);
+            istringstream(numStr) >> numero_top;
 
-    // Ordena os IDS de acordo com as suas avaliacoes
-    mergeSort(ids_jogadores, hash_player, 0, ids_jogadores.size() - 1);
+            // Encontrando a posição entre as aspas
+            size_t posStart = entrada.find_first_of("'\"", numEnd);
+            size_t posEnd = entrada.find_first_of("'\"", posStart + 1);
 
-    // Pegar os primeiros numero_top jogadores
-    int tamanho = ids_jogadores.size(); // tava dando warning
-    for (int i = 0; i < numero_top && i < tamanho; ++i)
-    {
-        if (hash_player.search(ids_jogadores[i]).count >= 1)
-        {
-            topJogadores.push_back(hash_player.search(ids_jogadores[i]));
+            if (posStart != string::npos && posEnd != string::npos) 
+                posicao = entrada.substr(posStart + 1, posEnd - posStart - 1);
         }
     }
 
-    for (const Player &player : topJogadores)
-    {
-        player.print_player();
-        cout<<endl;
+    // Fazer pesquisa na tabela hash "hash positions" com a posicao desejada
+    sofifa_ids = hash_positions.search(posicao).sofifa_id;
+
+    for(int id : sofifa_ids){
+        Player new_player;
+        new_player = hash_player.search(id);
+        players_top.push_back(new_player);
     }
+
+    // Ordena os IDS de acordo com as suas avaliacoes
+    int n = players_top.size();
+    quickSort(players_top, 0, n - 1);
+    
+    int controle;
+    controle = 1;
+
+    // Pegar os primeiros numero_top jogadores
+    for(Player &player: players_top){
+        
+        if(controle > numero_top){
+            break;
+        }
+
+        if(player.count>=1000)
+        {
+            player.print_player();
+            cout<<endl;
+            controle++;
+        }
+        
+
+
+    }
+    
 }
 
 // 2.4
@@ -209,4 +231,3 @@ void interseccaoIDS(vector<int> &ids_interseccao, const vector<list<int>> lista_
     }
 }
 
-// 2.2 (FAZER)

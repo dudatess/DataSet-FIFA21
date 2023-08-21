@@ -84,10 +84,9 @@ int main()
                     cout << endl;
                     pesquisaUser(entrada, hash_user, hash_player);
                 }
-                else if (comando == "top")
+                else if (comando[1] == 'o')
                 {
-                    cout << endl;
-                    pesquisaTop(entrada, hash_positions, hash_player);
+                    pesquisaTop(input, hash_positions, hash_player);
                 }
                 else if (comando == "tags")
                 {

@@ -24,7 +24,7 @@ void tabelaPlayers(Hash_Player &hash_player, Trie_Player &trie, Hash_Positions &
             // Coloca nas duas hash e na trie ao mesmo tempo
             hash_player.insert_player(stoi(row[0]), row[1], row[2]);
             trie.insert(row[1], stoi(row[0]));
-            hash_positions.insert(row[2], stoi(row[0]));
+            hash_positions.insert_position(row[2], stoi(row[0]));
         }
         line_count++;
     }

@@ -7,97 +7,147 @@
 
 using namespace std;
 
+// CLASSE DAS POSICOES
+class Position
+{
+public:
+    string position;
+    vector<int> sofifa_id;
+
+    void print_position() const
+    {
+        cout << "position: " << position << endl;
+        int i=0;
+        for(int id: sofifa_id)
+        {
+            cout << id << " ";
+            i++;
+        }
+
+    }
+};
+
+
 
 // HASH TABLE EM QUE AS CHAVES SAO AS POSICOES
 class Hash_Positions{
     
 private:
 
-    static const int TABLE_SIZE = 200;
-    vector<int> table[TABLE_SIZE];
+    static const int TABLE_SIZE = 2000;
+    list<Position> table[TABLE_SIZE];
 
-    // Funcao de hash em que as posicoes sao as chaves
-    int hashFunction(const string &positions)
+    int hashFunction(const string& positions)
     {
-        //Funcao hash polinomial, utilizado propriedade aritmetica modular 
-        int hash = 0;
-        
-        int len = positions.length();
+        unsigned long hash = 5381; // Um número primo recomendado como valor inicial
 
-        for(int i = 0; i < len ; i++)
+        for (char c : positions)
         {
-            hash = (31 * hash + positions[i]) % TABLE_SIZE;
+            // Atualize o hash usando uma combinação de multiplicação e adição
+            hash = ((hash << 5) + hash) + static_cast<unsigned char>(c);
         }
 
-        return hash;
+        return hash % TABLE_SIZE;
     }
 
 
 public:
 
-    void insert(const string &positions, int id)
+    // DADO AS POSITIONS E UM SOFIFA_ID INSERE NA TABELA
+    void insert_position(string positions, int sofifa_id)
     {
         vector<string> positions_jogador;
         istringstream iss(positions);
         string position;
         int index = 0;
 
-        //Separar as posicoes dos jogadores tirando as apostrofes
-        while (iss >> position)
+        //Separar as posicoes dos jogadores usando vírgulas como delimitador
+        while (getline(iss, position, ','))
         {
-            // Tire as apostrofes da tag
-            if (position.front() == '\'' && position.back() == '\'')
+            // Remova espaços em branco extras ao redor da posição
+            position.erase(0, position.find_first_not_of(" "));
+            position.erase(position.find_last_not_of(" ") + 1);
+
+            // Tire as aspas da posição, se presentes
+            if (!position.empty() && position.front() == '\'' && position.back() == '\'')
             {
                 position = position.substr(1, position.length() - 2);
             }
-            // Guarda as tags em um vector
-            positions_jogador.push_back(position);
 
+            // Se a posição não estiver vazia, adicione-a ao vetor
+            if (!position.empty())
+            {
+                positions_jogador.push_back(position);
+            }
         }
 
         //Inserir cada posicao do vetor na tabela hash 
         for(const auto& p : positions_jogador)
         {
             index = hashFunction(p);
-            table[index].push_back(id);
+
+            if (table[index].empty())
+            {
+                Position new_pos;
+                new_pos.position = p;
+                new_pos.sofifa_id.push_back(sofifa_id);
+                table[index].push_back(new_pos);
+            }
+
+            else
+            {
+                for (Position &pos : table[index])
+                {
+                    if (pos.position == p)
+                    {
+                        pos.sofifa_id.push_back(sofifa_id);
+                        return;
+                    }
+                }
+            }
+
+
+
+
+
         }
         
     }
 
-    vector<int> findPosition(const string &position)
+    // DADO UMA POS RETORNA UM POSITION
+    Position search(string pos)
     {
-        int index = hashFunction(position);
-    
-        if (!table[index].empty())
-        {
-            return table[index];
-        } 
-        else 
-        {
-            return vector<int>();
-        }
+        int index = hashFunction(pos);
 
+            for (Position &p : table[index])
+            {
+                if (p.position == pos)
+                    return p;
+
+            }
+
+        return Position();
     }
 
+    // IMPRIME AS INFORMACOES DE CADA POSITION DA TABELA
     void printTable()
     {
-            for(const vector<int> &ids : table)
-            {
-                cout << "  ----------------------" << endl;
-
-                for(const int id : ids)
-                {
-                    cout << id << endl;
-                }
+        for (int index = 0; index < TABLE_SIZE; ++index)
+        {
+            for (Position pos : table[index])
+            {   
 
                 cout << "  ----------------------" << endl;
+                pos.print_position();
+                cout <<  "\n  ----------------------" << endl;
+
             }
+        }
         
     }
-
 };
 
-void tabelaPosicoes(Hash_Positions &hash_positions);
+
 
 
 #endif /*TOP_H*/
