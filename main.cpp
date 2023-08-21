@@ -26,12 +26,16 @@ int main()
 
     cout << "COMECOU" << endl;
     tabelaPlayers(hash_player, trie_player, hash_positions, "players.csv"); // 2.1 e 2.2
-    cout << "TERMINOU PLAYER.CSV" << endl;
+
     tabelaRatings(hash_user, hash_player, "rating.csv"); // 2.1 e 2.2
-    cout << "TERMINOU RATINGS.CSV" << endl;
+
     tabelaTags(hash_tags); // 2.4
-    cout << "TERMINOU TAGS.CSV" << endl;
+
     cout << "AS CONSTRUCOES TERMINARAM!" << endl;
+
+    /*user 8419*/
+    /*user 118646*/
+    /*user 30813*/
 
 
     /*PROCESSAMENTO DOS COMANDOS*/

@@ -72,7 +72,6 @@ public:
                         swap(user.rating[i], user.rating[i - 1]);
                         swap(user.sofifa_id[i], user.sofifa_id[i - 1]);
                     }
-                    return;
                 }
             }
         }

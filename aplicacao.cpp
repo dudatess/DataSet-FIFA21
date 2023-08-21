@@ -33,6 +33,8 @@ void pesquisaPlayer(string prefix, Trie_Player &trie_player, Hash_Player &hash_p
 void pesquisaUser(string entrada, Hash_User &hash_user, Hash_Player &hash_player)
 {
 
+    cout << "Jogadores avaliados pelo usuario '" << entrada << "': " << endl;
+
     int user_id = stoi(entrada);
     User user = hash_user.search(user_id);
 
@@ -88,6 +90,8 @@ void pesquisaTop(string entrada, Hash_Positions &hash_positions, Hash_Player &ha
         }
     }
 
+    cout << "Top " << numero_top << " Jogadores " << posicao << " " << endl;
+
     sofifa_ids = hash_positions.search(posicao).sofifa_id;
 
     for(int id : sofifa_ids){
@@ -123,6 +127,9 @@ void pesquisaTop(string entrada, Hash_Positions &hash_positions, Hash_Player &ha
 // 2.4
 void pesquisaTags(string tags_juntas, Hash_Tags &hash_tags, Hash_Player &hash_player)
 {
+
+    cout << "Jogadores " << tags_juntas << endl;
+    
     vector<string> tags;
     vector<Player> players;
     istringstream iss(tags_juntas);
