@@ -39,12 +39,12 @@ private:
 
     int hashFunction(const string& positions)
     {
-        unsigned long hash = 5381; // Um número primo recomendado como valor inicial
+        int hash = 5381; // Um número primo recomendado como valor inicial
 
         for (char c : positions)
         {
             // Atualize o hash usando uma combinação de multiplicação e adição
-            hash = ((hash << 5) + hash) + static_cast<unsigned char>(c);
+            hash += static_cast<unsigned char>(c);
         }
 
         return hash % TABLE_SIZE;
@@ -56,7 +56,7 @@ public:
     // DADO AS POSITIONS E UM SOFIFA_ID INSERE NA TABELA
     void insert_position(string positions, int sofifa_id)
     {
-        vector<string> positions_jogador;
+        vector<string> positions_player;
         istringstream iss(positions);
         string position;
         int index = 0;
@@ -77,13 +77,14 @@ public:
             // Se a posição não estiver vazia, adicione-a ao vetor
             if (!position.empty())
             {
-                positions_jogador.push_back(position);
+                positions_player.push_back(position);
             }
         }
 
         //Inserir cada posicao do vetor na tabela hash 
-        for(const auto& p : positions_jogador)
+        for(const auto& p : positions_player)
         {
+            
             index = hashFunction(p);
 
             if (table[index].empty())
@@ -101,17 +102,11 @@ public:
                     if (pos.position == p)
                     {
                         pos.sofifa_id.push_back(sofifa_id);
-                        return;
                     }
                 }
             }
 
-
-
-
-
         }
-        
     }
 
     // DADO UMA POS RETORNA UM POSITION
@@ -136,7 +131,6 @@ public:
         {
             for (Position pos : table[index])
             {   
-
                 cout << "  ----------------------" << endl;
                 pos.print_position();
                 cout <<  "\n  ----------------------" << endl;

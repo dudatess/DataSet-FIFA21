@@ -35,9 +35,9 @@ int main()
 
     /*LIMBO DE TESTES*/
 
-    /*126061*/
-    /*2782 */
-    /*14904*/
+    /*user 126061*/
+    /*user 2782 */
+    /*user 14904*/
 
     /*PROCESSAMENTO DOS COMANDOS*/
 
@@ -86,7 +86,6 @@ int main()
                 }
                 else if (comando[1] == 'o')
                 {
-                    hash_positions.printTable();
                     pesquisaTop(input, hash_positions, hash_player);
                 }
                 else if (comando == "tags")
