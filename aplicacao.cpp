@@ -98,7 +98,7 @@ void pesquisaTop(string entrada, Hash_Positions &hash_positions, Hash_Player &ha
 
     int n = players_top.size();
     quickSort(players_top, 0, n - 1);
-    
+     
     int controle;
     controle = 1;
 
@@ -108,7 +108,7 @@ void pesquisaTop(string entrada, Hash_Positions &hash_positions, Hash_Player &ha
             break;
         }
 
-        if(player.count>=1000)
+        if(player.count>1000)
         {
             player.print_player();
             cout<<endl;
@@ -116,6 +116,7 @@ void pesquisaTop(string entrada, Hash_Positions &hash_positions, Hash_Player &ha
         }
         
     }
+    
     
 }
 

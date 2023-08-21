@@ -86,6 +86,7 @@ int main()
                 }
                 else if (comando[1] == 'o')
                 {
+                    hash_positions.printTable();
                     pesquisaTop(input, hash_positions, hash_player);
                 }
                 else if (comando == "tags")
