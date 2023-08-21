@@ -20,7 +20,9 @@ class Hash_Tags
         //Funcao hash polinomial, utilizado propriedade aritmetica modular 
         int hash = 0;
 
-        for(int i = 0; i < tag.length(); i++)
+        int len = tag.length();
+
+        for(int i = 0; i < len ; i++)
         {
             hash = (31 * hash + tag[i]) % TABLE_SIZE;
         }

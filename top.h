@@ -21,8 +21,10 @@ private:
     {
         //Funcao hash polinomial, utilizado propriedade aritmetica modular 
         int hash = 0;
+        
+        int len = positions.length();
 
-        for(int i = 0; i < positions.length(); i++)
+        for(int i = 0; i < len ; i++)
         {
             hash = (31 * hash + positions[i]) % TABLE_SIZE;
         }
