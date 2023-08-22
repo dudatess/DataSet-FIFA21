@@ -40,46 +40,43 @@ void sortDescending(vector<Player>& players)
     quickSort(players, 0, n - 1);
 }
 
+// MANTER ORDENACAO ESTAVEL
+bool shouldSwap(int a, int b, vector<double> rating) {
+    if (rating[a] != rating[b]) 
+    {
+        return rating[a] > rating[b];
+    }
 
-
-
-
-
-
-
-void swapTwo(vector<int>& vec1, vector<double>& vec2, int index1, int index2)
-{
-    swap(vec1[index1], vec1[index2]);
-    swap(vec2[index1], vec2[index2]);
+    return false;
 }
 
 
-int partition_r(vector<double>& arr, vector<int>& sofifa, int low, int high)
-{
-    double pivot = arr[high]; 
-    int i = (low - 1);
+//PARTICAO DE RATING
+int partition_r(vector<double>& rating, vector<int>& sofifa, int low, int high) {
+    int i = low - 1;
 
-    for (int j = low; j <= high - 1; j++)
-    {
-        
-        if (arr[j] >= pivot)
-        {
+    for (int j = low; j <= high - 1; j++) {
+        if (shouldSwap(j, high, rating)) {
             i++;
-            swapTwo(sofifa, arr, i, j);
+            swap(sofifa[i], sofifa[j]);
+            swap(rating[i], rating[j]);
         }
     }
-    swapTwo(sofifa, arr, i + 1, high);
+
+    swap(sofifa[i + 1], sofifa[high]);
+    swap(rating[i + 1], rating[high]);
+
     return (i + 1);
 }
 
+//QUICKSORT DO RATING
+void quicksort_r(vector<double>& rating, vector<int>& sofifa, int low, int high) {
+    if (low < high) {
+        int pi = partition_r(rating, sofifa, low, high);
 
-void quicksort_r(vector<double>& arr, vector<int>& sofifa, int low, int high)
-{
-    if (low < high)
-    {
-        int pi = partition_r(arr, sofifa, low, high);
-
-        quicksort_r(arr, sofifa, low, pi - 1);
-        quicksort_r(arr, sofifa, pi + 1, high);
+        quicksort_r(rating, sofifa, low, pi - 1);
+        quicksort_r(rating, sofifa, pi + 1, high);
     }
 }
+
+

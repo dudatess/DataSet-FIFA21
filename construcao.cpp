@@ -53,7 +53,6 @@ void tabelaRatings(Hash_User &hash_user, Hash_Player &hash_player, string rating
     }
 }
 
-// LE O ARQUIVO PLAYERS.CSV E COLOCA EM UMA HASH
 
 // LE O ARQUIVO TAGS.CSV E COLOCA EM UMA HASH
 void tabelaTags(Hash_Tags &hash_tags)

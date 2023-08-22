@@ -26,6 +26,20 @@ public:
         }
 
     }
+
+    // DADO UM SOFIFA DIZ SE TEM NA TAG
+    bool tem(int i)
+    {
+        for (int id : sofifa_id)
+        {
+            if (id == i)
+                return true;
+        }
+
+        return false; 
+    }
+
+
 };
 
 
@@ -92,7 +106,7 @@ class Hash_Tags
 
         }
 
-        // DADO UMA POS RETORNA UMA TAG
+        // DADO UMA TAG RETORNA UMA Tag
         Tag search(string tag)
         {
             int index = hashFunction(tag);
@@ -106,6 +120,10 @@ class Hash_Tags
 
             return Tag();
         }
+
+
+
+
 
         // IMPRIME AS INFORMACOES DE CADA TAG DA TABELA
         void printTable()
@@ -122,10 +140,13 @@ class Hash_Tags
             }
             
         }
+
+
+
+
 };
 
 //Declaracao de funcoes para pesquisa de tags
-void interseccaoIDS(vector<int> &ids_interseccao, const vector<list<int>> lista_ids);
+void pesquisaTags(string tags_juntas, Hash_Tags &hash_tags, Hash_Player &hash_player);
 
 #endif /*TAGS_H*/
-
