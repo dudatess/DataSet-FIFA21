@@ -70,7 +70,7 @@ void tabelaTags(Hash_Tags &hash_tags)
     {
         if (line_count > 0)
         {
-            hash_tags.insert(row[2], stoi(row[1]));
+            hash_tags.insert_tag(row[2], stoi(row[1]));
         }
 
         line_count++;

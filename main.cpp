@@ -33,10 +33,8 @@ int main()
 
     cout << "AS CONSTRUCOES TERMINARAM!" << endl;
 
-    /*user 8419*/
-    /*user 118646*/
-    /*user 30813*/
 
+    /*user 4 tem 188*/
 
     /*PROCESSAMENTO DOS COMANDOS*/
 

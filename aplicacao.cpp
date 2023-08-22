@@ -3,7 +3,6 @@
 #include "tags.h"
 #include "top.h"
 #include "quicksort.cpp"
-#include <algorithm> // TEM QUE TIRAR ESSE ALGORITHM
 
 using namespace std;
 
@@ -37,15 +36,17 @@ void pesquisaUser(string entrada, Hash_User &hash_user, Hash_Player &hash_player
 
     int user_id = stoi(entrada);
     User user = hash_user.search(user_id);
-
-    int controle = 0, i = 0;
+ 
+    int i = 0, controle=0;
 
     cout << "sofifa_id ";
     cout << "name ";
     cout << "player_positions ";
-    cout << "global_rating " << fixed << setprecision(6);
+    cout << "global_rating " ;
     cout << "count ";
     cout << "rating " << endl;
+
+    quicksort_r(user.rating, user.sofifa_id, 0, user.rating.size() - 1);
 
     for (int id : user.sofifa_id)
     {
@@ -54,6 +55,7 @@ void pesquisaUser(string entrada, Hash_User &hash_user, Hash_Player &hash_player
         cout << user.rating[i] << endl;
 
         i++;
+
         controle++;
         if (controle > 20)
             break;
@@ -124,11 +126,56 @@ void pesquisaTop(string entrada, Hash_Positions &hash_positions, Hash_Player &ha
     
 }
 
+// Função para verificar se um número está em uma lista
+bool find(vector<int> &vetor, int numero)
+{
+    for (int num : vetor)
+    {
+        if (num == numero)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void interseccaoIDS(vector<int> &ids_interseccao, vector<int> &sofifa_ids)
+{
+    // Se há uma lista vazia, retorna vazio
+    if (sofifa_ids.empty())
+    {
+        cout << "Não há nenhum jogador com estas tags." << endl;
+        return;
+    }
+
+    // Primeiro, vamos verificar se o primeiro elemento está presente em todas as listas
+    for (int num : sofifa_ids)
+    {
+        bool elemento_comum = true; // Assume que o elemento é comum até que seja provado o contrário
+
+        for (size_t i = 1; i < sofifa_ids.size(); ++i)
+        {
+            if (!find(sofifa_ids, num))
+            {
+                elemento_comum = false; // Se o elemento não estiver presente em alguma lista, não é comum
+                break;
+            }
+        }
+
+        // Se o elemento for comum a todas as listas, inserir no vetor
+        if (elemento_comum)
+        {
+            ids_interseccao.push_back(num);
+        }
+    }
+}
+
+
 // 2.4
 void pesquisaTags(string tags_juntas, Hash_Tags &hash_tags, Hash_Player &hash_player)
 {
 
-    cout << "Jogadores " << tags_juntas << endl;
+    cout << "Jogadores " << tags_juntas << " :"<<endl;
     
     vector<string> tags;
     vector<Player> players;
@@ -149,9 +196,9 @@ void pesquisaTags(string tags_juntas, Hash_Tags &hash_tags, Hash_Player &hash_pl
         // Se tiver apenas uma tag, efetuar uma pesquisa simples
         //(nao precisa fazer interseccao)
 
-        list<int> ids;
+        vector<int> ids;
 
-        ids = hash_tags.findPlayerTag(tags[0]);
+        ids = hash_tags.search(tags[0]).sofifa_id;
 
         // Para cada player, pesquisar seus dados na hash player
         for (const int &num : ids)
@@ -170,28 +217,28 @@ void pesquisaTags(string tags_juntas, Hash_Tags &hash_tags, Hash_Player &hash_pl
     else
     {
 
-        vector<list<int>> lista_ids;
+        vector<int> sofifa_ids;
 
         // Para cada uma das tags
         for (string chave : tags)
         {
             // Fazer a pesquisa dos IDS na hash e guardar em um vetor
-            lista_ids.push_back(hash_tags.findPlayerTag(chave));
+            sofifa_ids= hash_tags.search(chave).sofifa_id;
         }
 
         // Chamar funcao que adiciona os ids dos jogadores que contem todas as tags dadas
         vector<int> ids_interseccao;
 
-        interseccaoIDS(ids_interseccao, lista_ids);
+        interseccaoIDS(ids_interseccao, sofifa_ids);
 
         // Para cada player, pesquisar seus dados na hash player
-        for (const int &num : ids_interseccao)
+        for (int num : ids_interseccao)
         {
             players.push_back(hash_player.search(num));
         }
 
         // Imprimir informações de cada player
-        for (const Player &player : players)
+        for (Player &player : players)
         {
             player.print_player();
             cout<<endl;
@@ -199,37 +246,5 @@ void pesquisaTags(string tags_juntas, Hash_Tags &hash_tags, Hash_Player &hash_pl
     }
 }
 
-// 2.4
-void interseccaoIDS(vector<int> &ids_interseccao, const vector<list<int>> lista_ids)
-{
-    // Se ha uma lista vazia, retorna vazio
-    for (const auto &lst : lista_ids)
-    {
-        if (lst.empty())
-        {
-            cout << "Nao ha nenhum jogador com estas tags." << endl;
-            return;
-        }
-    }
 
-    for (const auto &num : lista_ids[0])
-    {
-        bool elemento_comum = true;
-
-        for (size_t i = 1; i < lista_ids.size(); ++i)
-        {
-            if (find(lista_ids[i].begin(), lista_ids[i].end(), num) == lista_ids[i].end()) // NAO PODE ESSE FIND
-            {
-                elemento_comum = false;
-                break;
-            }
-        }
-
-        // Se elemento for comum a todas as listas, ineserir no vetor
-        if (elemento_comum)
-        {
-            ids_interseccao.push_back(num);
-        }
-    }
-}
 

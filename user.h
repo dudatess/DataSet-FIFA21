@@ -22,8 +22,8 @@ public:
         int i=0;
         for(int id: sofifa_id)
         {
-            cout << "sofifa_id: "<< id;
-            cout << " rating: " << rating[i] << endl;
+            cout << "<" << id << " ";
+            cout << rating[i] << ">   ";
             i++;
         }
 
@@ -60,21 +60,31 @@ public:
 
         else
         {
+            bool nao_colocou=true;
+
             for (User &user : table[index])
             {
                 if (user.user_id == user_id)
                 {
+                    nao_colocou=false;
                     user.sofifa_id.push_back(sofifa_id);
                     user.rating.push_back(rating);
-                    // ORDEM DECRESCENTE demora 30 segundos a mais se a gente ordenar antes
-                    for (size_t i = user.rating.size() - 1; i > 0 && user.rating[i] > user.rating[i - 1]; --i)
-                    {
-                        swap(user.rating[i], user.rating[i - 1]);
-                        swap(user.sofifa_id[i], user.sofifa_id[i - 1]);
-                    }
                 }
+        
             }
+
+            if(nao_colocou){
+                User new_user;
+                new_user.user_id = user_id;
+                new_user.sofifa_id.push_back(sofifa_id);
+                new_user.rating.push_back(rating);
+                table[index].push_back(new_user);
+            }
+
         }
+
+
+            
     }
 
 

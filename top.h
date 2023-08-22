@@ -39,11 +39,11 @@ private:
 
     int hashFunction(const string& positions)
     {
-        int hash = 5381; // Um número primo recomendado como valor inicial
+        int hash = 5381; // Um número primo
 
         for (char c : positions)
         {
-            // Atualize o hash usando uma combinação de multiplicação e adição
+
             hash += static_cast<unsigned char>(c);
         }
 

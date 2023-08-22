@@ -8,79 +8,118 @@
 using namespace std;
 
 
+// CLASSE DAS TAGS
+class Tag
+{
+public:
+    string tag;
+    vector<int> sofifa_id;
+
+    void print_tag() const
+    {
+        cout << "tag: " << tag << endl;
+        int i=0;
+        for(int id: sofifa_id)
+        {
+            cout << id << " ";
+            i++;
+        }
+
+    }
+};
+
+
 class Hash_Tags
 {
     private:
 
         static const int TABLE_SIZE = 20000;
-        list<int> table[TABLE_SIZE];
+        list<Tag> table[TABLE_SIZE];
 
-    // Funcao de hash em que as tags sao as chaves
-    int hashFunction(const string &tag)
-    {
-        //Funcao hash polinomial, utilizado propriedade aritmetica modular 
-        int hash = 0;
-
-        int len = tag.length();
-
-        for(int i = 0; i < len ; i++)
+        int hashFunction(const string &tag)
         {
-            hash = (31 * hash + tag[i]) % TABLE_SIZE;
-        }
+            int hash = 5381; // Um número primo
 
-        return hash;
-    }
+            for (char c : tag)
+            {
+                hash += static_cast<unsigned char>(c);
+            }
+
+            return hash % TABLE_SIZE;
+        }
 
     public:
 
-        void insert(const string &tag, int id)
+        // VERIFICA SE UM NUMERO ESTA NA LISTA
+        bool find(vector<int> &vetor, int numero)
         {
-            int index = hashFunction(tag);
-
-            // Verificar se o id já está presente na lista
-            bool found = false;
-            for (int existing_id : table[index])
+            for (int num : vetor)
             {
-                if (existing_id == id)
+                if (num == numero)
                 {
-                    found = true;
-                    break;
+                    return true;
                 }
             }
-
-            if (!found)
-            {
-                table[index].push_back(id);
-            }
+            return false;
         }
 
-        list<int> findPlayerTag(const string &tag)
+        // DADO UMA TAG E UM SOFIFA_ID INSERE NA TABELA
+        void insert_tag(const string &tag, int sofifa_id)
         {
             int index = hashFunction(tag);
-        
             
-            if (!table[index].empty())
+            if (table[index].empty())
             {
-                return table[index];
-            } 
-            else 
-            {
-                return list<int>();
+                Tag new_tag;
+                new_tag.tag = tag;
+                new_tag.sofifa_id.push_back(sofifa_id);
+                table[index].push_back(new_tag);
             }
 
-        }
-
-        void printTable()
-        {
-                for (const list<int> &ids : table)
+            else
+            {
+                for (Tag &t : table[index])
                 {
-                    for (const int id : ids)
+                    if (t.tag == tag)
                     {
-                        cout << "  ----------------------" << endl;
-                        cout << id << endl;
-                        cout << "  ----------------------" << endl;
+                        if(!find(t.sofifa_id, sofifa_id))
+                        {
+                            t.sofifa_id.push_back(sofifa_id);
+                        }
                     }
                 }
+            }
+
+        }
+
+        // DADO UMA POS RETORNA UMA TAG
+        Tag search(string tag)
+        {
+            int index = hashFunction(tag);
+
+                for (Tag &t : table[index])
+                {
+                    if (t.tag == tag)
+                        return t;
+
+                }
+
+            return Tag();
+        }
+
+        // IMPRIME AS INFORMACOES DE CADA TAG DA TABELA
+        void printTable()
+        {
+            for (int index = 0; index < TABLE_SIZE; ++index)
+            {
+                for (Tag t : table[index])
+                {   
+                    cout << "  ----------------------" << endl;
+                    t.print_tag();
+                    cout <<  "\n  ----------------------" << endl;
+
+                }
+            }
             
         }
 };
@@ -90,87 +129,3 @@ void interseccaoIDS(vector<int> &ids_interseccao, const vector<list<int>> lista_
 
 #endif /*TAGS_H*/
 
-
-// DECLARACAO CLASSE HASH TABLE PARA TAGS (a chave são as tags e os dados nos buckets sao os IDS)
-
-/*
-class Hash_Tags
-{
-
-private:
-    static const int TABLE_SIZE = 20000;
-    vector<list<int>> table[TABLE_SIZE];
-
-    // Funcao de hash em que as tags sao as chaves
-    int hashFunction(const string &tag)
-    {
-        // Variável hash armazena a soma dos caracteres da tag
-        int hash = 0;
-        for (char c : tag)
-        {
-            hash += c;
-        }
-
-        return hash % TABLE_SIZE;
-    }
-
-public:
-    void insert(const string &tag, int id)
-    {
-        int index = hashFunction(tag);
-
-        if (table[index].empty())
-        {
-            table[index].emplace_back();
-        }
-
-        // Encontrar a lista apropriada no bucket
-        auto &id_list = table[index].back();
-
-        // Verificar se o id já está presente na lista
-        bool found = false;
-        for (int existing_id : id_list)
-        {
-            if (existing_id == id)
-            {
-                found = true;
-                break;
-            }
-        }
-
-        if (!found)
-        {
-            id_list.push_back(id);
-        }
-    }
-
-    list<int> findPlayerTag(const string &tag)
-    {
-            int index = hashFunction(tag);
-    
-        if (!table[index].empty()) {
-        return table[index].back();
-         } else {
-        return list<int>();
-        }
-        int index = hashFunction(tag);
-        return table[index].empty() ? table[index];
-    }
-
-    void printTable()
-    {
-        for (int index = 0; index < TABLE_SIZE; ++index)
-        {
-            for (const list<int> &ids : table[index])
-            {
-                for (const int id : ids)
-                {
-                    cout << "  ----------------------" << endl;
-                    cout << id << endl;
-                    cout << "  ----------------------" << endl;
-                }
-            }
-        }
-    }
-};
-*/
