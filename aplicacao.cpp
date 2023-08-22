@@ -162,26 +162,26 @@ void pesquisaTags(string tags_juntas, Hash_Tags &hash_tags, Hash_Player &hash_pl
     }
     
 
-    for (Tag t : vetor_tags)
-    {
-        for(int i=0; i<sofifa_ids.size(); i++)
-        {
-            if(!t.tem(sofifa_ids[i]))
-            {
-                sofifa_ids.erase(sofifa_ids.begin() + i);
-            }
-        }
-    }
+    int i = 0, indice = 0;
 
-    for (Tag t : vetor_tags)
+    for (string chave : tags)
     {
-        for(int i=0; i<sofifa_ids.size(); i++)
+        vector<int>::iterator it = sofifa_ids.begin();
+
+        while (it != sofifa_ids.end())
         {
-            if(!t.tem(sofifa_ids[i]))
+
+            if (!vetor_tags[indice].tem(*it))
             {
-                sofifa_ids.erase(sofifa_ids.begin() + i);
+                it = sofifa_ids.erase(it);
+            }
+            else
+            {
+                ++it;
             }
         }
+
+        indice++;
     }
 
     
