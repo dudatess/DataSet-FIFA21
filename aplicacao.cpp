@@ -162,7 +162,7 @@ void pesquisaTags(string tags_juntas, Hash_Tags &hash_tags, Hash_Player &hash_pl
     }
     
 
-    int i = 0, indice = 0;
+    int indice = 0;
 
     for (string chave : tags)
     {
